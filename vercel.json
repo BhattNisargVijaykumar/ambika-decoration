@@ -4,13 +4,13 @@
   "trailingSlash": false,
   "functions": {
     "api/**/*.php": {
-      "runtime": "vercel-php@0.7.2"
+      "runtime": "now-php@1.0.0"
     },
     "admin/**/*.php": {
-      "runtime": "vercel-php@0.7.2"
+      "runtime": "now-php@1.0.0"
     },
     "*.php": {
-      "runtime": "vercel-php@0.7.2"
+      "runtime": "now-php@1.0.0"
     }
   },
   "rewrites": [
