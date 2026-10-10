@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ambika Decoration & Party Plot | Luxury Wedding Decor & Catering</title>
-  <meta name="description" content="Premire Party Plot venue, traditional Chori & Mandap decoration, and royal catering services for weddings, receptions, sangeet, and grand party events.">
+  <title>Ambika Decoration & Party Plot | Luxury Wedding Decor, Party Plot & Catering</title>
+  <meta name="description" content="Premier Party Plot venue, traditional Chori & Mandap decoration, and royal pure-veg catering services for weddings, receptions, and grand events.">
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,7 +14,7 @@
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
-  <!-- Stylesheets -->
+  <!-- Custom Master Styles -->
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -58,26 +58,9 @@
     </div>
   </div>
 
-  <!-- Background Animated Canvas -->
+  <!-- Background Animated Canvas (Sparkles + Floating Petals) -->
   <canvas id="sparkle-canvas"></canvas>
-
-  <!-- Top Announcement Bar -->
-  <div class="top-bar">
-    <div class="container top-bar-content">
-      <div class="top-info">
-        <span class="info-item"><i class="fa-solid fa-location-dot icon-gold"></i> Ambika Party Plot & Lawn, Main Ring Road</span>
-        <span class="info-item"><i class="fa-solid fa-phone icon-gold"></i> Direct Line: <a href="tel:+919876543210">+91 98765 43210</a></span>
-      </div>
-      <div class="top-socials">
-        <a href="https://instagram.com" target="_blank" rel="noopener" class="top-social-link" title="Follow us on Instagram">
-          <i class="fa-brands fa-instagram"></i> @ambika_decoration
-        </a>
-        <a href="https://wa.me/919876543210?text=Hi%20Ambika%20Decoration,%20I%20want%20to%20inquire%20about%20event%20booking" target="_blank" rel="noopener" class="top-social-link whatsapp-glow" title="Chat on WhatsApp">
-          <i class="fa-brands fa-whatsapp"></i> Instant WhatsApp
-        </a>
-      </div>
-    </div>
-  </div>
+  <div class="flower-petals-container" id="flower-petals"></div>
 
   <!-- Backdrop Overlay & Mobile Bottom Sheet Menu -->
   <div class="nav-backdrop" id="nav-backdrop"></div>
@@ -113,8 +96,7 @@
     <div class="hero-overlay"></div>
     <div class="container hero-content">
       <div class="hero-badge fade-in">
-        <i class="fa-solid fa-crown icon-gold"></i> Royal Event Decorators & Open Lawn Venue
-      </div>
+        <i class="fa-solid fa-crown icon-gold"></i> Royal Event Decorators & Open Lawn Venue      </div>
       <h1 class="hero-title fade-in delay-1">
         Crafting Unforgettable <span class="text-gradient">Royal Celebrations</span> & Weddings
       </h1>
@@ -123,34 +105,37 @@
       </p>
 
       <div class="hero-buttons fade-in delay-3">
-        <a href="https://wa.me/919876543210?text=Hello%20Ambika%20Decoration,%20I%20would%20like%20to%20check%20available%20dates%20for%20my%20event!" target="_blank" rel="noopener" class="btn btn-whatsapp glow-effect">
-          <i class="fa-brands fa-whatsapp"></i> Book via WhatsApp
+        <a href="https://wa.me/917567049869?text=Hello%20Ambika%20Decoration,%20I%20would%20like%20to%20check%20available%20dates!" target="_blank" rel="noopener" class="btn btn-whatsapp glow-effect">
+          <i class="fa-brands fa-whatsapp"></i> WhatsApp 1
         </a>
-        <a href="tel:+919876543210" class="btn btn-call">
-          <i class="fa-solid fa-phone"></i> Call +91 98765 43210
+        <a href="https://wa.me/919924837197?text=Hello%20Ambika%20Decoration,%20I%20would%20like%20to%20check%20available%20dates!" target="_blank" rel="noopener" class="btn btn-whatsapp glow-effect">
+          <i class="fa-brands fa-whatsapp"></i> WhatsApp 2
         </a>
-        <a href="#chori-decor" class="btn btn-outline">
-          <i class="fa-solid fa-images"></i> View Our Work
+        <a href="tel:+917567049869" class="btn btn-call">
+          <i class="fa-solid fa-phone"></i> Call Line 1
+        </a>
+        <a href="tel:+919924837197" class="btn btn-call">
+          <i class="fa-solid fa-phone"></i> Call Line 2
         </a>
       </div>
 
       <!-- Quick Metrics Strip -->
       <div class="hero-metrics fade-in delay-4">
-        <div class="metric-card">
-          <span class="metric-number" data-target="500">0</span><span class="metric-plus">+</span>
-          <span class="metric-label">Grand Weddings Managed</span>
-        </div>
-        <div class="metric-divider"></div>
-        <div class="metric-card">
-          <span class="metric-number" data-target="2500">0</span><span class="metric-plus">+</span>
-          <span class="metric-label">Guest Capacity Lawn</span>
-        </div>
-        <div class="metric-divider"></div>
-        <div class="metric-card">
-          <span class="metric-number" data-target="10">0</span><span class="metric-plus">+</span>
-          <span class="metric-label">Years of Decor Excellence</span>
-        </div>
-      </div>
+                  <div class="metric-card">
+            <span class="metric-number" data-target="500">0</span><span class="metric-plus">+</span>
+            <span class="metric-label">Grand Weddings Managed</span>
+          </div>
+                      <div class="metric-divider"></div>
+                            <div class="metric-card">
+            <span class="metric-number" data-target="2500">0</span><span class="metric-plus">+</span>
+            <span class="metric-label">Guest Capacity Lawn</span>
+          </div>
+                      <div class="metric-divider"></div>
+                            <div class="metric-card">
+            <span class="metric-number" data-target="10">0</span><span class="metric-plus">+</span>
+            <span class="metric-label">Years of Decor Excellence</span>
+          </div>
+                        </div>
     </div>
     
     <div class="scroll-down-indicator">
@@ -160,10 +145,10 @@
     </div>
   </section>
 
-  <!-- Section 1: Party Plot Venue -->
+  <!-- Section 1: Party Plot Venue (Zoom-In Opening Animation) -->
   <section class="section party-plot-section" id="party-plot">
     <div class="container">
-      <div class="section-header text-center">
+      <div class="section-header text-center scroll-zoom-in">
         <span class="section-subtitle"><i class="fa-solid fa-gem icon-gold"></i> Our Exclusive Venue</span>
         <h2 class="section-title">Ambika Party Plot <span class="text-gradient">& Open Lawn</span></h2>
         <p class="section-description">
@@ -174,7 +159,7 @@
       <div class="party-plot-grid">
         <div class="party-plot-main-card glass-card scroll-reveal">
           <div class="image-wrapper">
-            <img src="assets/images/party_plot_lawn.jpg" alt="Ambika Party Plot Decorated Night View" class="showcase-img">
+            <img src="assets/images/party_plot_lawn.jpg" alt="Ambika Party Plot Night View" class="showcase-img">
             <div class="img-badge"><i class="fa-solid fa-star"></i> Night Lightings Setup</div>
           </div>
           <div class="card-content">
@@ -187,10 +172,10 @@
               <li><i class="fa-solid fa-check-circle icon-gold"></i> 100% Uninterrupted Power Backup Generator</li>
             </ul>
             <div class="action-row">
-              <a href="https://wa.me/919876543210?text=Hi%20Ambika%20Decoration,%20I%20want%20to%20inquire%20about%20Party%20Plot%20Rental%20dates" target="_blank" class="btn btn-whatsapp-sm">
+              <a href="https://wa.me/917567049869?text=Hi%20Ambika%20Decoration,%20I%20want%20to%20inquire%20about%20Party%20Plot%20Rental%20dates" target="_blank" class="btn btn-whatsapp-sm">
                 <i class="fa-brands fa-whatsapp"></i> Inquire Plot Booking
               </a>
-              <a href="tel:+919876543210" class="btn btn-ghost-sm">
+              <a href="tel:+917567049869" class="btn btn-ghost-sm">
                 <i class="fa-solid fa-phone"></i> Call Venue Manager
               </a>
             </div>
@@ -199,7 +184,7 @@
 
         <div class="party-plot-sub-card glass-card scroll-reveal delay-1">
           <div class="image-wrapper">
-            <img src="assets/images/sangeet_stage_decor.jpg" alt="Royal Sangeet and Reception Stage Decoration" class="showcase-img">
+            <img src="assets/images/sangeet_stage_decor.jpg" alt="Royal Sangeet Stage Decor" class="showcase-img">
             <div class="img-badge"><i class="fa-solid fa-crown"></i> Stage Decor</div>
           </div>
           <div class="card-content">
@@ -211,99 +196,95 @@
     </div>
   </section>
 
-  <!-- Section 2: Traditional Chori & Mandap Setup -->
+  <!-- Section 2: View Our Work - Dual Row Auto-Scrolling Marquee Gallery (NO DESCRIPTION) -->
   <section class="section chori-section dark-bg" id="chori-decor">
-    <div class="container">
-      <div class="section-header text-center">
-        <span class="section-subtitle"><i class="fa-solid fa-om icon-gold"></i> Traditional Rituals</span>
-        <h2 class="section-title">Royal Mandap & <span class="text-gradient">Chori Preparations</span></h2>
+    <div class="container-fluid">
+      <div class="section-header text-center scroll-zoom-in">
+        <span class="section-subtitle"><i class="fa-solid fa-images icon-gold"></i> Visual Portfolio</span>
+        <h2 class="section-title">View Our <span class="text-gradient">Decor & Event Work</span></h2>
         <p class="section-description">
-          Authentic Gujarati & Indian wedding Mandap setups with traditional Chori, sacred Agni Kund decoration, kalash arrangements, and fresh marigold floral arches.
+          Explore our signature Mandap Chori setups, party plot illuminations, stage backdrops, and catering spreads.
         </p>
       </div>
 
-      <!-- Filter Controls -->
-      <div class="gallery-filters">
-        <button class="filter-btn active" data-filter="all">All Decor</button>
-        <button class="filter-btn" data-filter="chori">Chori & Mandap</button>
-        <button class="filter-btn" data-filter="stage">Stage & Reception</button>
-        <button class="filter-btn" data-filter="lawn">Lawn & Gate Setup</button>
-      </div>
-
-      <!-- Gallery Grid -->
-      <div class="gallery-grid">
-        <!-- Chori Card 1 -->
-        <div class="gallery-card glass-card scroll-reveal" data-category="chori">
-          <div class="gallery-img-container">
-            <img src="assets/images/wedding_chori_mandap.jpg" alt="Grand Traditional Wedding Mandap Chori" class="gallery-img">
-            <div class="gallery-overlay">
-              <button class="btn-lightbox-trigger" data-img="assets/images/wedding_chori_mandap.jpg" data-caption="Grand Traditional Wedding Mandap Chori Setup">
-                <i class="fa-solid fa-expand"></i> View Full Image
-              </button>
-            </div>
-          </div>
-          <div class="gallery-info">
-            <span class="tag">Chori & Mandap</span>
-            <h4>Grand Floral Dome Mandap</h4>
-            <p>Fresh marigold garlands, red roses, golden chandeliers & carved pillars for sacred wedding phere.</p>
-          </div>
+      <!-- Infinite Dual-Row Auto-Scrolling Marquee Gallery (Dynamic Admin Uploads) -->
+      <div class="marquee-wrapper">
+        <!-- Row 1: Auto Scroll RIGHT -->
+        <div class="marquee-row">
+          <div class="marquee-track track-right">
+                          <div class="marquee-card btn-lightbox-trigger" data-img="assets/images/wedding_chori_mandap.jpg" data-caption="Ambika Event Showcase Photo">
+                <img src="assets/images/wedding_chori_mandap.jpg" alt="Event Showcase Photo">
+              </div>
+                          <div class="marquee-card btn-lightbox-trigger" data-img="assets/images/wedding_chori_mandap.jpg" data-caption="Ambika Event Showcase Photo">
+                <img src="assets/images/wedding_chori_mandap.jpg" alt="Event Showcase Photo">
+              </div>
+                          <div class="marquee-card btn-lightbox-trigger" data-img="assets/images/wedding_chori_mandap.jpg" data-caption="Ambika Event Showcase Photo">
+                <img src="assets/images/wedding_chori_mandap.jpg" alt="Event Showcase Photo">
+              </div>
+                          <div class="marquee-card btn-lightbox-trigger" data-img="assets/images/wedding_chori_mandap.jpg" data-caption="Ambika Event Showcase Photo">
+                <img src="assets/images/wedding_chori_mandap.jpg" alt="Event Showcase Photo">
+              </div>
+                          <div class="marquee-card btn-lightbox-trigger" data-img="assets/images/wedding_chori_mandap.jpg" data-caption="Ambika Event Showcase Photo">
+                <img src="assets/images/wedding_chori_mandap.jpg" alt="Event Showcase Photo">
+              </div>
+                          <div class="marquee-card btn-lightbox-trigger" data-img="assets/images/wedding_chori_mandap.jpg" data-caption="Ambika Event Showcase Photo">
+                <img src="assets/images/wedding_chori_mandap.jpg" alt="Event Showcase Photo">
+              </div>
+                          <div class="marquee-card btn-lightbox-trigger" data-img="assets/images/wedding_chori_mandap.jpg" data-caption="Ambika Event Showcase Photo">
+                <img src="assets/images/wedding_chori_mandap.jpg" alt="Event Showcase Photo">
+              </div>
+                          <div class="marquee-card btn-lightbox-trigger" data-img="assets/images/wedding_chori_mandap.jpg" data-caption="Ambika Event Showcase Photo">
+                <img src="assets/images/wedding_chori_mandap.jpg" alt="Event Showcase Photo">
+              </div>
+                          <div class="marquee-card btn-lightbox-trigger" data-img="assets/images/wedding_chori_mandap.jpg" data-caption="Ambika Event Showcase Photo">
+                <img src="assets/images/wedding_chori_mandap.jpg" alt="Event Showcase Photo">
+              </div>
+                          <div class="marquee-card btn-lightbox-trigger" data-img="assets/images/wedding_chori_mandap.jpg" data-caption="Ambika Event Showcase Photo">
+                <img src="assets/images/wedding_chori_mandap.jpg" alt="Event Showcase Photo">
+              </div>
+                      </div>
         </div>
 
-        <!-- Chori Card 2 -->
-        <div class="gallery-card glass-card scroll-reveal delay-1" data-category="chori">
-          <div class="gallery-img-container">
-            <img src="assets/images/traditional_chori_close.jpg" alt="Traditional Chori Kalash and Ritual Setup" class="gallery-img">
-            <div class="gallery-overlay">
-              <button class="btn-lightbox-trigger" data-img="assets/images/traditional_chori_close.jpg" data-caption="Traditional Chori Kalash & Agni Kund Detail Setup">
-                <i class="fa-solid fa-expand"></i> View Full Image
-              </button>
-            </div>
-          </div>
-          <div class="gallery-info">
-            <span class="tag">Chori Rituals</span>
-            <h4>Authentic Chori & Kalash Vidhi</h4>
-            <p>Traditional brass kalash pots with sacred coconut, flower rangoli, and auspicious Agni Kund arrangement.</p>
-          </div>
-        </div>
-
-        <!-- Stage Card -->
-        <div class="gallery-card glass-card scroll-reveal delay-2" data-category="stage">
-          <div class="gallery-img-container">
-            <img src="assets/images/sangeet_stage_decor.jpg" alt="Sangeet and Reception Royal Stage Backdrop" class="gallery-img">
-            <div class="gallery-overlay">
-              <button class="btn-lightbox-trigger" data-img="assets/images/sangeet_stage_decor.jpg" data-caption="Sangeet & Reception Royal Stage Setup">
-                <i class="fa-solid fa-expand"></i> View Full Image
-              </button>
-            </div>
-          </div>
-          <div class="gallery-info">
-            <span class="tag">Stage & Sangeet</span>
-            <h4>Royal Crimson & Gold Stage</h4>
-            <p>Velvet backdrops, chandelier clusters, orchid flower arches and sofa seating for bride and groom.</p>
-          </div>
-        </div>
-
-        <!-- Lawn Gate Card -->
-        <div class="gallery-card glass-card scroll-reveal delay-3" data-category="lawn">
-          <div class="gallery-img-container">
-            <img src="assets/images/party_plot_lawn.jpg" alt="Party Plot Grand Fairy Light Entrance Tunnel" class="gallery-img">
-            <div class="gallery-overlay">
-              <button class="btn-lightbox-trigger" data-img="assets/images/party_plot_lawn.jpg" data-caption="Party Plot Fairy Light Entrance Tunnel & Lawn">
-                <i class="fa-solid fa-expand"></i> View Full Image
-              </button>
-            </div>
-          </div>
-          <div class="gallery-info">
-            <span class="tag">Lawn & Gate</span>
-            <h4>Fairytale Floral Entrance Tunnel</h4>
-            <p>Illuminated archway with hanging crystal lights and rose flower arrangements welcoming your guests.</p>
-          </div>
+        <!-- Row 2: Auto Scroll LEFT -->
+        <div class="marquee-row">
+          <div class="marquee-track track-left">
+                          <div class="marquee-card btn-lightbox-trigger" data-img="assets/images/party_plot_lawn.jpg" data-caption="Ambika Event Showcase Photo">
+                <img src="assets/images/party_plot_lawn.jpg" alt="Event Showcase Photo">
+              </div>
+                          <div class="marquee-card btn-lightbox-trigger" data-img="assets/images/party_plot_lawn.jpg" data-caption="Ambika Event Showcase Photo">
+                <img src="assets/images/party_plot_lawn.jpg" alt="Event Showcase Photo">
+              </div>
+                          <div class="marquee-card btn-lightbox-trigger" data-img="assets/images/party_plot_lawn.jpg" data-caption="Ambika Event Showcase Photo">
+                <img src="assets/images/party_plot_lawn.jpg" alt="Event Showcase Photo">
+              </div>
+                          <div class="marquee-card btn-lightbox-trigger" data-img="assets/images/party_plot_lawn.jpg" data-caption="Ambika Event Showcase Photo">
+                <img src="assets/images/party_plot_lawn.jpg" alt="Event Showcase Photo">
+              </div>
+                          <div class="marquee-card btn-lightbox-trigger" data-img="assets/images/party_plot_lawn.jpg" data-caption="Ambika Event Showcase Photo">
+                <img src="assets/images/party_plot_lawn.jpg" alt="Event Showcase Photo">
+              </div>
+                          <div class="marquee-card btn-lightbox-trigger" data-img="assets/images/party_plot_lawn.jpg" data-caption="Ambika Event Showcase Photo">
+                <img src="assets/images/party_plot_lawn.jpg" alt="Event Showcase Photo">
+              </div>
+                          <div class="marquee-card btn-lightbox-trigger" data-img="assets/images/party_plot_lawn.jpg" data-caption="Ambika Event Showcase Photo">
+                <img src="assets/images/party_plot_lawn.jpg" alt="Event Showcase Photo">
+              </div>
+                          <div class="marquee-card btn-lightbox-trigger" data-img="assets/images/party_plot_lawn.jpg" data-caption="Ambika Event Showcase Photo">
+                <img src="assets/images/party_plot_lawn.jpg" alt="Event Showcase Photo">
+              </div>
+                          <div class="marquee-card btn-lightbox-trigger" data-img="assets/images/party_plot_lawn.jpg" data-caption="Ambika Event Showcase Photo">
+                <img src="assets/images/party_plot_lawn.jpg" alt="Event Showcase Photo">
+              </div>
+                          <div class="marquee-card btn-lightbox-trigger" data-img="assets/images/party_plot_lawn.jpg" data-caption="Ambika Event Showcase Photo">
+                <img src="assets/images/party_plot_lawn.jpg" alt="Event Showcase Photo">
+              </div>
+                      </div>
         </div>
       </div>
       
       <div class="text-center margin-top-lg">
-        <a href="https://wa.me/919876543210?text=Hi%20Ambika%20Decoration,%20I%20want%20to%20see%20more%20Chori%20Mandap%20designs%20and%20pricing!" target="_blank" class="btn btn-whatsapp glow-effect">
-          <i class="fa-brands fa-whatsapp"></i> Request Custom Chori Design via WhatsApp
+        <a href="https://wa.me/917567049869?text=Hi%20Ambika%20Decoration,%20I%20want%20to%20see%20more%20Chori%20Mandap%20designs" target="_blank" class="btn btn-whatsapp glow-effect">
+          <i class="fa-brands fa-whatsapp"></i> Request Custom Decor Photo Catalogue on WhatsApp
         </a>
       </div>
     </div>
@@ -312,19 +293,38 @@
   <!-- Section 3: Catering & Food Delicacies -->
   <section class="section catering-section" id="catering-menu">
     <div class="container">
-      <div class="section-header text-center">
+      <div class="section-header text-center scroll-zoom-in">
         <span class="section-subtitle"><i class="fa-solid fa-utensils icon-gold"></i> Pure Veg Gourmet Experience</span>
         <h2 class="section-title">Royal Catering & <span class="text-gradient">Food Presentation</span></h2>
         <p class="section-description">
-          We prepare 100% pure vegetarian culinary masterpieces — from authentic Gujarati thalis & traditional sweet spreads to live chaat counters, continental live kitchens, and designer dessert displays.
+          We prepare 100% pure vegetarian culinary masterpieces — from authentic Gujarati thalis & traditional sweet spreads to live chaat counters, continental kitchens, and designer dessert displays.
         </p>
       </div>
 
-      <!-- Catering Highlights Grid -->
+      <!-- Royal Gujarati Thali Animated Feature Showcase -->
+      <div class="gujarati-thali-hero scroll-reveal">
+        <div class="thali-card-wrapper glass-card">
+          <div class="thali-visual-container">
+            <div class="thali-glow-ring"></div>
+            <img src="assets/images/catering_sweets.jpg" alt="Royal Gujarati Thali & Sweets Showcase" class="thali-img">
+          </div>
+          <div class="thali-details">
+            <span class="section-subtitle"><i class="fa-solid fa-crown icon-gold"></i> Authentic Culinary Pride</span>
+            <h3>Royal Shahi Gujarati Thali</h3>
+            <p>Serves authentic Gujarati delicacies including Kaju Undhiyu, Desi Ghee Jalebi, Basundi, Khandvi, Farsan, Saffron Rice, Panchmel Dal, and unlimited hot Puris in traditional silver brassware.</p>
+            <div class="thali-badge-row">
+              <span class="thali-pill"><i class="fa-solid fa-seedling icon-gold"></i> 100% Pure Desi Ghee</span>
+              <span class="thali-pill"><i class="fa-solid fa-bowl-rice icon-gold"></i> Fresh Live Farsan</span>
+              <span class="thali-pill"><i class="fa-solid fa-star icon-gold"></i> Chef Special Sweets</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="catering-hero-grid margin-bottom-xl">
         <div class="catering-feature-card glass-card scroll-reveal">
           <div class="image-wrapper">
-            <img src="assets/images/catering_buffet.jpg" alt="Opulent Indian Wedding Catering Buffet" class="showcase-img">
+            <img src="assets/images/catering_buffet.jpg" alt="Opulent Indian Catering Buffet" class="showcase-img">
             <div class="img-badge"><i class="fa-solid fa-leaf"></i> 100% Pure Veg</div>
           </div>
           <div class="card-body">
@@ -335,7 +335,7 @@
 
         <div class="catering-feature-card glass-card scroll-reveal delay-1">
           <div class="image-wrapper">
-            <img src="assets/images/catering_sweets.jpg" alt="Traditional Indian Wedding Sweets Platter" class="showcase-img">
+            <img src="assets/images/catering_sweets.jpg" alt="Traditional Indian Sweets Platter" class="showcase-img">
             <div class="img-badge"><i class="fa-solid fa-cookie-bite"></i> Signature Sweets</div>
           </div>
           <div class="card-body">
@@ -345,176 +345,153 @@
         </div>
       </div>
 
-      <!-- Interactive Menu Tabs -->
+      <!-- Dynamic Catering Menu Tabs with Zoom Animation -->
       <div class="menu-tab-container glass-card scroll-reveal">
         <div class="menu-tab-header">
-          <button class="menu-tab-btn active" data-tab="gujarati">
-            <i class="fa-solid fa-bowl-food"></i> Royal Gujarati / Rajasthani
-          </button>
-          <button class="menu-tab-btn" data-tab="north-indian">
-            <i class="fa-solid fa-fire-burner"></i> North Indian & Chinese
-          </button>
-          <button class="menu-tab-btn" data-tab="live-counters">
-            <i class="fa-solid fa-shop"></i> Live Food Counters
-          </button>
-          <button class="menu-tab-btn" data-tab="sweets-beverages">
-            <i class="fa-solid fa-ice-cream"></i> Sweets & Mocktails
-          </button>
-        </div>
+                      <button class="menu-tab-btn active" data-tab="gujarati">
+              <i class="fa-solid fa-bowl-food"></i> Royal Gujarati & Rajasthani            </button>
+                      <button class="menu-tab-btn " data-tab="north-indian">
+              <i class="fa-solid fa-fire-burner"></i> North Indian & Chinese            </button>
+                      <button class="menu-tab-btn " data-tab="live-counters">
+              <i class="fa-solid fa-shop"></i> Live Food Counters            </button>
+                      <button class="menu-tab-btn " data-tab="sweets-beverages">
+              <i class="fa-solid fa-ice-cream"></i> Sweets & Mocktails            </button>
+                  </div>
 
         <div class="menu-tab-content">
-          <!-- Tab 1: Gujarati Thali -->
-          <div class="tab-pane active" id="tab-gujarati">
-            <div class="menu-grid">
-              <div class="menu-item">
-                <div class="menu-item-header">
-                  <span class="item-name">Kaju Draksh Undhiyu & Puri</span>
-                  <span class="badge-veg">Pure Veg</span>
-                </div>
-                <p class="item-desc">Traditional winter dish cooked with mixed winter veggies, dry fruits, and aromatic spices.</p>
-              </div>
-
-              <div class="menu-item">
-                <div class="menu-item-header">
-                  <span class="item-name">Gujarati Kadhi & Saffron Pulav</span>
-                  <span class="badge-veg">Pure Veg</span>
-                </div>
-                <p class="item-desc">Sweet and tangy tempered yogurt kadhi served with basmati saffron rice.</p>
-              </div>
-
-              <div class="menu-item">
-                <div class="menu-item-header">
-                  <span class="item-name">Dal Baati Churma (Rajasthani)</span>
-                  <span class="badge-veg">Pure Veg</span>
-                </div>
-                <p class="item-desc">Baked wheat balls dipped in pure desi ghee served with spicy panchmel dal and sweet churma.</p>
-              </div>
-
-              <div class="menu-item">
-                <div class="menu-item-header">
-                  <span class="item-name">Khandvi & Patra Farsan Platter</span>
-                  <span class="badge-veg">Pure Veg</span>
-                </div>
-                <p class="item-desc">Freshly tempered gram flour rolls with mustard seeds, sesame, and fresh coconut garnishing.</p>
-              </div>
+                      <div class="tab-pane active" id="tab-gujarati">
+              <div class="menu-grid">
+                                  <div class="menu-item">
+                    <div class="menu-item-header">
+                      <span class="item-name">Kaju Draksh Undhiyu &amp; Puri</span>
+                      <span class="badge-veg">Pure Veg</span>
+                    </div>
+                    <p class="item-desc">Traditional winter dish cooked with mixed winter veggies, dry fruits, and aromatic spices.</p>
+                  </div>
+                                  <div class="menu-item">
+                    <div class="menu-item-header">
+                      <span class="item-name">Gujarati Kadhi &amp; Saffron Pulav</span>
+                      <span class="badge-veg">Pure Veg</span>
+                    </div>
+                    <p class="item-desc">Sweet and tangy tempered yogurt kadhi served with basmati saffron rice.</p>
+                  </div>
+                                  <div class="menu-item">
+                    <div class="menu-item-header">
+                      <span class="item-name">Dal Baati Churma (Rajasthani)</span>
+                      <span class="badge-veg">Pure Veg</span>
+                    </div>
+                    <p class="item-desc">Baked wheat balls dipped in pure desi ghee served with spicy panchmel dal and sweet churma.</p>
+                  </div>
+                                  <div class="menu-item">
+                    <div class="menu-item-header">
+                      <span class="item-name">Khandvi &amp; Patra Farsan Platter</span>
+                      <span class="badge-veg">Pure Veg</span>
+                    </div>
+                    <p class="item-desc">Freshly tempered gram flour rolls with mustard seeds, sesame, and fresh coconut garnishing.</p>
+                  </div>
+                              </div>
             </div>
-          </div>
-
-          <!-- Tab 2: North Indian -->
-          <div class="tab-pane" id="tab-north-indian">
-            <div class="menu-grid">
-              <div class="menu-item">
-                <div class="menu-item-header">
-                  <span class="item-name">Paneer Lababdar / Shahi Paneer</span>
-                  <span class="badge-veg">Pure Veg</span>
-                </div>
-                <p class="item-desc">Cottage cheese cubes simmered in creamy tomato onion gravy with butter and kasturi methi.</p>
-              </div>
-
-              <div class="menu-item">
-                <div class="menu-item-header">
-                  <span class="item-name">Dal Makhani (24-Hour Slow Cooked)</span>
-                  <span class="badge-veg">Pure Veg</span>
-                </div>
-                <p class="item-desc">Rich black lentils slow-cooked overnight with cream, white butter, and aromatic spices.</p>
-              </div>
-
-              <div class="menu-item">
-                <div class="menu-item-header">
-                  <span class="item-name">Live Tandoori Roti & Naan Counter</span>
-                  <span class="badge-veg">Live Counter</span>
-                </div>
-                <p class="item-desc">Butter Naan, Garlic Naan, Missi Roti, and Laccha Paratha served fresh from clay oven.</p>
-              </div>
-
-              <div class="menu-item">
-                <div class="menu-item-header">
-                  <span class="item-name">Hakka Noodles & Manchurian Dry</span>
-                  <span class="badge-veg">Indo-Chinese</span>
-                </div>
-                <p class="item-desc">Wok-tossed noodles with crisp vegetables and vegetable dumpling balls in tangy sauce.</p>
-              </div>
+                      <div class="tab-pane " id="tab-north-indian">
+              <div class="menu-grid">
+                                  <div class="menu-item">
+                    <div class="menu-item-header">
+                      <span class="item-name">Paneer Lababdar / Shahi Paneer</span>
+                      <span class="badge-veg">Pure Veg</span>
+                    </div>
+                    <p class="item-desc">Cottage cheese cubes simmered in creamy tomato onion gravy with butter and kasturi methi.</p>
+                  </div>
+                                  <div class="menu-item">
+                    <div class="menu-item-header">
+                      <span class="item-name">Dal Makhani (24-Hour Slow Cooked)</span>
+                      <span class="badge-veg">Pure Veg</span>
+                    </div>
+                    <p class="item-desc">Rich black lentils slow-cooked overnight with cream, white butter, and aromatic spices.</p>
+                  </div>
+                                  <div class="menu-item">
+                    <div class="menu-item-header">
+                      <span class="item-name">Live Tandoori Roti &amp; Naan Counter</span>
+                      <span class="badge-veg">Live Counter</span>
+                    </div>
+                    <p class="item-desc">Butter Naan, Garlic Naan, Missi Roti, and Laccha Paratha served fresh from clay oven.</p>
+                  </div>
+                                  <div class="menu-item">
+                    <div class="menu-item-header">
+                      <span class="item-name">Hakka Noodles &amp; Manchurian Dry</span>
+                      <span class="badge-veg">Indo-Chinese</span>
+                    </div>
+                    <p class="item-desc">Wok-tossed noodles with crisp vegetables and vegetable dumpling balls in tangy sauce.</p>
+                  </div>
+                              </div>
             </div>
-          </div>
-
-          <!-- Tab 3: Live Counters -->
-          <div class="tab-pane" id="tab-live-counters">
-            <div class="menu-grid">
-              <div class="menu-item">
-                <div class="menu-item-header">
-                  <span class="item-name">Delhi Dahi Bhalla & Pani Puri Counter</span>
-                  <span class="badge-veg">Live Counter</span>
-                </div>
-                <p class="item-desc">5 flavors of mineral water pani puri with soft creamy dahi vada and pomegranate seeds.</p>
-              </div>
-
-              <div class="menu-item">
-                <div class="menu-item-header">
-                  <span class="item-name">Woodfired Italian Pizza & Pasta Bar</span>
-                  <span class="badge-veg">Live Counter</span>
-                </div>
-                <p class="item-desc">Custom pasta (Penne/Fettuccine) in Alfredo/Arrabbiata sauce with exotic veggies.</p>
-              </div>
-
-              <div class="menu-item">
-                <div class="menu-item-header">
-                  <span class="item-name">Live Pav Bhaji & Tawa Pulav</span>
-                  <span class="badge-veg">Live Counter</span>
-                </div>
-                <p class="item-desc">Hot buttery bhaji on big iron tawa served with soft toasted pavs and lemon wedges.</p>
-              </div>
-
-              <div class="menu-item">
-                <div class="menu-item-header">
-                  <span class="item-name">South Indian Dosa & Uttapam Station</span>
-                  <span class="badge-veg">Live Counter</span>
-                </div>
-                <p class="item-desc">Crispy Masala Dosa, Paper Dosa, and Onion Uttapam served with 3 coconut chutneys and sambar.</p>
-              </div>
+                      <div class="tab-pane " id="tab-live-counters">
+              <div class="menu-grid">
+                                  <div class="menu-item">
+                    <div class="menu-item-header">
+                      <span class="item-name">Delhi Dahi Bhalla &amp; Pani Puri Counter</span>
+                      <span class="badge-veg">Live Counter</span>
+                    </div>
+                    <p class="item-desc">5 flavors of mineral water pani puri with soft creamy dahi vada and pomegranate seeds.</p>
+                  </div>
+                                  <div class="menu-item">
+                    <div class="menu-item-header">
+                      <span class="item-name">Woodfired Italian Pizza &amp; Pasta Bar</span>
+                      <span class="badge-veg">Live Counter</span>
+                    </div>
+                    <p class="item-desc">Custom pasta (Penne/Fettuccine) in Alfredo/Arrabbiata sauce with exotic veggies.</p>
+                  </div>
+                                  <div class="menu-item">
+                    <div class="menu-item-header">
+                      <span class="item-name">Live Pav Bhaji &amp; Tawa Pulav</span>
+                      <span class="badge-veg">Live Counter</span>
+                    </div>
+                    <p class="item-desc">Hot buttery bhaji on big iron tawa served with soft toasted pavs and lemon wedges.</p>
+                  </div>
+                                  <div class="menu-item">
+                    <div class="menu-item-header">
+                      <span class="item-name">South Indian Dosa &amp; Uttapam Station</span>
+                      <span class="badge-veg">Live Counter</span>
+                    </div>
+                    <p class="item-desc">Crispy Masala Dosa, Paper Dosa, and Onion Uttapam served with 3 coconut chutneys and sambar.</p>
+                  </div>
+                              </div>
             </div>
-          </div>
-
-          <!-- Tab 4: Sweets & Beverages -->
-          <div class="tab-pane" id="tab-sweets-beverages">
-            <div class="menu-grid">
-              <div class="menu-item">
-                <div class="menu-item-header">
-                  <span class="item-name">Live Jalebi & Rabdi Counter</span>
-                  <span class="badge-veg">Signature Sweet</span>
-                </div>
-                <p class="item-desc">Crispy hot saffron jalebis fried in pure ghee paired with thick chilled rabdi.</p>
-              </div>
-
-              <div class="menu-item">
-                <div class="menu-item-header">
-                  <span class="item-name">Sitaphal & Kesar Pista Basundi</span>
-                  <span class="badge-veg">Signature Sweet</span>
-                </div>
-                <p class="item-desc">Rich condensed milk dessert infused with real custard apple pulp and saffron pista shavings.</p>
-              </div>
-
-              <div class="menu-item">
-                <div class="menu-item-header">
-                  <span class="item-name">Exotic Welcome Drinks & Mocktails</span>
-                  <span class="badge-veg">Live Beverage</span>
-                </div>
-                <p class="item-desc">Blue Lagoon, Virgin Mojito, Mango Mastani, Fresh Guava Chilli, and Roasted Masala Chaas.</p>
-              </div>
-
-              <div class="menu-item">
-                <div class="menu-item-header">
-                  <span class="item-name">Ice Cream Sundae & Dryfruit Counter</span>
-                  <span class="badge-veg">Dessert Station</span>
-                </div>
-                <p class="item-desc">Assorted gourmet ice creams topped with chocolate fountains, nuts, and fresh berries.</p>
-              </div>
+                      <div class="tab-pane " id="tab-sweets-beverages">
+              <div class="menu-grid">
+                                  <div class="menu-item">
+                    <div class="menu-item-header">
+                      <span class="item-name">Live Jalebi &amp; Rabdi Counter</span>
+                      <span class="badge-veg">Signature Sweet</span>
+                    </div>
+                    <p class="item-desc">Crispy hot saffron jalebis fried in pure ghee paired with thick chilled rabdi.</p>
+                  </div>
+                                  <div class="menu-item">
+                    <div class="menu-item-header">
+                      <span class="item-name">Sitaphal &amp; Kesar Pista Basundi</span>
+                      <span class="badge-veg">Signature Sweet</span>
+                    </div>
+                    <p class="item-desc">Rich condensed milk dessert infused with real custard apple pulp and saffron pista shavings.</p>
+                  </div>
+                                  <div class="menu-item">
+                    <div class="menu-item-header">
+                      <span class="item-name">Exotic Welcome Drinks &amp; Mocktails</span>
+                      <span class="badge-veg">Live Beverage</span>
+                    </div>
+                    <p class="item-desc">Blue Lagoon, Virgin Mojito, Mango Mastani, Fresh Guava Chilli, and Roasted Masala Chaas.</p>
+                  </div>
+                                  <div class="menu-item">
+                    <div class="menu-item-header">
+                      <span class="item-name">Ice Cream Sundae &amp; Dryfruit Counter</span>
+                      <span class="badge-veg">Dessert Station</span>
+                    </div>
+                    <p class="item-desc">Assorted gourmet ice creams topped with chocolate fountains, nuts, and fresh berries.</p>
+                  </div>
+                              </div>
             </div>
-          </div>
-        </div>
+                  </div>
 
         <div class="menu-footer-cta">
           <span>Need a customized catering menu for 200 to 5,000 guests?</span>
-          <a href="https://wa.me/919876543210?text=Hi%20Ambika%20Catering,%20please%20send%20me%20your%20full%20Catering%20Menu%20PDF%20and%20per-plate%20pricing" target="_blank" class="btn btn-whatsapp-sm">
+          <a href="https://wa.me/917567049869?text=Hi%20Ambika%20Catering,%20please%20send%20me%20your%20full%20Catering%20Menu%20PDF" target="_blank" class="btn btn-whatsapp-sm">
             <i class="fa-brands fa-whatsapp"></i> Get Full Menu PDF on WhatsApp
           </a>
         </div>
@@ -522,21 +499,21 @@
     </div>
   </section>
 
-  <!-- Section 4: Live Instagram Feed Highlights -->
+  <!-- Section 4: Live Instagram Connect Banner (No Images) -->
   <section class="section instagram-section dark-bg" id="instagram-feed">
     <div class="container">
-      <div class="section-header text-center">
+      <div class="section-header text-center scroll-zoom-in">
         <span class="section-subtitle"><i class="fa-brands fa-instagram icon-gold"></i> Live Social Showcase</span>
         <h2 class="section-title">Follow Our Work On <span class="text-gradient">Instagram</span></h2>
         <p class="section-description">
-          Stay updated with our latest wedding decor reels, live chori setups, stage lighting videos, and catering grand spreads on Instagram <strong class="text-gold">@ambika_decoration</strong>.
+          Stay updated with our latest wedding decor reels, live chori setups, stage lighting videos, and catering spreads on Instagram <strong class="text-gold">@ambika_decoration</strong>.
         </p>
       </div>
 
       <div class="instagram-banner glass-card scroll-reveal">
         <div class="insta-profile-info">
           <div class="insta-avatar">
-            <i class="fa-solid fa-camera-retro"></i>
+            <i class="fa-brands fa-instagram"></i>
           </div>
           <div class="insta-details">
             <h3>@ambika_decoration</h3>
@@ -549,52 +526,13 @@
           </div>
         </div>
         <a href="https://instagram.com" target="_blank" rel="noopener" class="btn btn-insta glow-effect">
-          <i class="fa-brands fa-instagram"></i> Follow on Instagram
-        </a>
-      </div>
-
-      <!-- Instagram Grid Mockup -->
-      <div class="insta-grid">
-        <a href="https://instagram.com" target="_blank" rel="noopener" class="insta-card scroll-reveal">
-          <img src="assets/images/wedding_chori_mandap.jpg" alt="Instagram Post Wedding Mandap Decor">
-          <div class="insta-hover-overlay">
-            <i class="fa-brands fa-instagram"></i>
-            <span>View Reel on Instagram</span>
-            <div class="insta-meta"><i class="fa-solid fa-heart"></i> 1,420 likes</div>
-          </div>
-        </a>
-
-        <a href="https://instagram.com" target="_blank" rel="noopener" class="insta-card scroll-reveal delay-1">
-          <img src="assets/images/party_plot_lawn.jpg" alt="Instagram Post Party Plot Lightings">
-          <div class="insta-hover-overlay">
-            <i class="fa-brands fa-instagram"></i>
-            <span>View Reel on Instagram</span>
-            <div class="insta-meta"><i class="fa-solid fa-heart"></i> 2,890 likes</div>
-          </div>
-        </a>
-
-        <a href="https://instagram.com" target="_blank" rel="noopener" class="insta-card scroll-reveal delay-2">
-          <img src="assets/images/catering_buffet.jpg" alt="Instagram Post Catering Spread">
-          <div class="insta-hover-overlay">
-            <i class="fa-brands fa-instagram"></i>
-            <span>View Reel on Instagram</span>
-            <div class="insta-meta"><i class="fa-solid fa-heart"></i> 1,950 likes</div>
-          </div>
-        </a>
-
-        <a href="https://instagram.com" target="_blank" rel="noopener" class="insta-card scroll-reveal delay-3">
-          <img src="assets/images/traditional_chori_close.jpg" alt="Instagram Post Traditional Chori Setup">
-          <div class="insta-hover-overlay">
-            <i class="fa-brands fa-instagram"></i>
-            <span>View Reel on Instagram</span>
-            <div class="insta-meta"><i class="fa-solid fa-heart"></i> 3,120 likes</div>
-          </div>
+          <i class="fa-brands fa-instagram"></i> Visit Our Instagram Page
         </a>
       </div>
     </div>
   </section>
 
-  <!-- Section 5: Direct Quick Inquiry Form (WhatsApp & Direct Call) -->
+  <!-- Section 5: Direct Quick Inquiry Form (PHP Backend API + Instant WhatsApp) -->
   <section class="section inquiry-section" id="inquiry-section">
     <div class="container">
       <div class="inquiry-box glass-card scroll-reveal">
@@ -605,31 +543,48 @@
             <p>Select your event details below to calculate a quick instant estimate and send your inquiry directly to our team via WhatsApp or Phone Call.</p>
             
             <div class="direct-contact-pills">
-              <a href="tel:+919876543210" class="contact-pill">
-                <i class="fa-solid fa-phone icon-gold"></i>
-                <div>
-                  <small>Call Us Directly</small>
-                  <strong>+91 98765 43210</strong>
+              <!-- Contact Card Line 1 -->
+              <div class="contact-line-box">
+                <span class="contact-line-label"><i class="fa-solid fa-phone icon-gold"></i> Line 1: +91 75670 49869</span>
+                <div class="contact-line-buttons">
+                  <a href="tel:+917567049869" class="contact-pill">
+                    <i class="fa-solid fa-phone icon-gold"></i> Call
+                  </a>
+                  <a href="https://wa.me/917567049869?text=Hi%20Ambika%20Decoration!" target="_blank" class="contact-pill whatsapp-pill">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                  </a>
                 </div>
-              </a>
+              </div>
 
-              <a href="https://wa.me/919876543210" target="_blank" class="contact-pill whatsapp-pill">
-                <i class="fa-brands fa-whatsapp"></i>
-                <div>
-                  <small>Instant WhatsApp</small>
-                  <strong>+91 98765 43210</strong>
+              <!-- Contact Card Line 2 -->
+              <div class="contact-line-box">
+                <span class="contact-line-label"><i class="fa-solid fa-phone icon-gold"></i> Line 2: +91 99248 37197</span>
+                <div class="contact-line-buttons">
+                  <a href="tel:+919924837197" class="contact-pill">
+                    <i class="fa-solid fa-phone icon-gold"></i> Call
+                  </a>
+                  <a href="https://wa.me/919924837197?text=Hi%20Ambika%20Decoration!" target="_blank" class="contact-pill whatsapp-pill">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                  </a>
                 </div>
-              </a>
+              </div>
             </div>
 
             <div class="office-hours">
-              <i class="fa-solid fa-clock icon-gold"></i> <strong>Booking Office Hours:</strong> 10:00 AM – 10:00 PM (Open All 7 Days)
-            </div>
+              <i class="fa-solid fa-clock icon-gold"></i> <strong>Booking Office Hours:</strong> 10:00 AM – 10:00 PM (Open All 7 Days)            </div>
           </div>
 
           <div class="inquiry-form-card">
             <h3><i class="fa-solid fa-paper-plane icon-gold"></i> Instant WhatsApp Inquiry</h3>
             <form id="whatsapp-inquiry-form" onsubmit="handleInquirySubmit(event)">
+              <div class="form-group">
+                <label for="whatsapp-recipient">Select WhatsApp Contact Number</label>
+                <select id="whatsapp-recipient" required>
+                  <option value="917567049869" selected>+91 75670 49869 (Primary Line)</option>
+                  <option value="919924837197">+91 99248 37197 (Secondary Line)</option>
+                </select>
+              </div>
+
               <div class="form-group">
                 <label for="event-type">Select Event Type</label>
                 <select id="event-type" required>
@@ -685,7 +640,7 @@
       <div class="footer-brand">
         <div class="logo-emblem">A</div>
         <h3>AMBIKA DECORATION & PARTY PLOT</h3>
-        <p>Your one-stop destination for party plot venue, royal chori/mandap decoration, gourmet veg catering, and end-to-end event management.</p>
+        <p>Your premier destination for party plot venue, royal chori/mandap decoration, gourmet veg catering, and end-to-end event management.</p>
       </div>
 
       <div class="footer-links">
@@ -744,7 +699,7 @@
 
     <div class="footer-bottom text-center">
       <div class="container">
-        <p>&copy; 2026 Ambika Decoration. All rights reserved to Ambika Decoration Dahegam.</p>
+        <p>&copy; 2026 Ambika Decoration. All rights reserved to Ambika Decoration - Dahegam.</p>
       </div>
     </div>
   </footer>
@@ -779,7 +734,7 @@
     </a>
   </div>
 
-  <!-- Mobile Bottom Quick Navigation Bar -->
+  <!-- Mobile Bottom Action Navigation Bar -->
   <div class="mobile-bottom-bar">
     <a href="tel:+917567049869" class="mobile-bar-item">
       <i class="fa-solid fa-phone"></i>
@@ -803,7 +758,7 @@
     </a>
   </div>
 
-  <!-- JavaScript -->
+  <!-- JS Frontend Script -->
   <script src="script.js"></script>
 </body>
 </html>
