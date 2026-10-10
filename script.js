@@ -27,15 +27,19 @@ function initPreloader() {
 
   if (!preloader || !bar || !counter) return;
 
+  bar.style.width = '0%';
+  counter.textContent = '000%';
+
   const totalDuration = 2800;
   const startTime = performance.now();
 
   function updatePreloader(currentTime) {
-    const elapsed = currentTime - startTime;
+    const now = (typeof currentTime === 'number' && !isNaN(currentTime)) ? currentTime : performance.now();
+    const elapsed = Math.max(0, now - startTime);
     const progress = Math.min(1, elapsed / totalDuration);
 
     const easedProgress = Math.pow(progress, 0.85);
-    const percent = Math.floor(easedProgress * 100);
+    const percent = (isNaN(easedProgress) || !isFinite(easedProgress)) ? 0 : Math.floor(easedProgress * 100);
 
     bar.style.width = `${percent}%`;
     counter.textContent = `${String(percent).padStart(3, '0')}%`;
