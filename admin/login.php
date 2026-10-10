@@ -1,6 +1,11 @@
 <?php
 require_once __DIR__ . '/auth.php';
 
+if (is_admin_logged_in()) {
+    header('Location: index.php');
+    exit;
+}
+
 $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -8,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = isset($_POST['password']) ? trim($_POST['password']) : '';
 
     if ($username === ADMIN_USERNAME && $password === ADMIN_PASSWORD) {
-        $_SESSION['admin_logged_in'] = true;
+        set_admin_login_session();
         header('Location: index.php');
         exit;
     } else {
