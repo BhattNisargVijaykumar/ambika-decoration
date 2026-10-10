@@ -9,7 +9,10 @@ if (isset($_GET['file'])) {
 
     // Security check: ensure file path is inside assets directory
     if ($full_path && strpos($full_path, $base_dir) === 0 && file_exists($full_path)) {
-        @unlink($full_path);
+        if (!@unlink($full_path)) {
+            header('Location: index.php?error=delete_readonly');
+            exit;
+        }
 
         // Re-sync index.html and gallery.html
         @exec("php -r \"ob_start(); include '" . __DIR__ . "/../index.php'; file_put_contents('" . __DIR__ . "/../index.html', ob_get_clean()); ob_start(); include '" . __DIR__ . "/../gallery.php'; file_put_contents('" . __DIR__ . "/../gallery.html', ob_get_clean());\"");

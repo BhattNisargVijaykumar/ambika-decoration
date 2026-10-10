@@ -34,14 +34,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['media_file'])) {
             $filename = 'media_' . time() . '_' . rand(100, 999) . '.' . $ext;
             $destination = $dest_dir . $filename;
 
-            if (move_uploaded_file($file['tmp_name'], $destination)) {
+            // Check read-only environment
+            if (!is_writable($dest_dir)) {
+                header('Location: index.php?error=readonly');
+                exit;
+            }
+
+            if (@move_uploaded_file($file['tmp_name'], $destination)) {
                 // Trigger static page build to keep HTML synced
                 @exec("php -r \"ob_start(); include '" . __DIR__ . "/../index.php'; file_put_contents('" . __DIR__ . "/../index.html', ob_get_clean()); ob_start(); include '" . __DIR__ . "/../gallery.php'; file_put_contents('" . __DIR__ . "/../gallery.html', ob_get_clean());\"");
 
                 header('Location: index.php?msg=success');
                 exit;
             } else {
-                header('Location: index.php?error=upload_failed');
+                header('Location: index.php?error=readonly');
                 exit;
             }
         } else {

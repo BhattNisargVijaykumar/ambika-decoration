@@ -161,6 +161,10 @@ $error = isset($_GET['error']) ? $_GET['error'] : '';
       <div class="alert-banner alert-success"><i class="fa-solid fa-circle-check"></i> File uploaded successfully into selected folder! It is now live in your gallery.</div>
     <?php elseif ($msg === 'deleted'): ?>
       <div class="alert-banner alert-success"><i class="fa-solid fa-circle-check"></i> Media file removed from gallery folder.</div>
+    <?php elseif ($error === 'readonly'): ?>
+      <div class="alert-banner alert-danger"><i class="fa-solid fa-triangle-exclamation"></i> <strong>Vercel Serverless Hosting Notice:</strong> Vercel's cloud environment has a read-only filesystem. File uploads work permanently on local servers & standard web hosting (cPanel/Hostinger). To add new photos to Vercel, simply drop your image file into the <code>assets/images/catalog/</code>, <code>row1/</code>, or <code>row2/</code> folder and push to GitHub!</div>
+    <?php elseif ($error === 'delete_readonly'): ?>
+      <div class="alert-banner alert-danger"><i class="fa-solid fa-triangle-exclamation"></i> <strong>Vercel Serverless Hosting Notice:</strong> Cannot delete files directly on Vercel's read-only filesystem. Remove the file from your local <code>assets/</code> folder and push to GitHub.</div>
     <?php elseif ($error): ?>
       <div class="alert-banner alert-danger"><i class="fa-solid fa-triangle-exclamation"></i> Error processing file upload. Please check file type (Image/Video).</div>
     <?php endif; ?>
