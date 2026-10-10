@@ -46,6 +46,10 @@ while (count($row2_images) < 10) {
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
+  <!-- Favicon & Tab Icon -->
+  <link rel="icon" type="image/png" href="assets/Logo.png">
+  <link rel="apple-touch-icon" href="assets/Logo.png">
+  
   <!-- Custom Master Styles -->
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -57,7 +61,7 @@ while (count($row2_images) < 10) {
     <div class="preloader-bg-glow glow-bottom-right"></div>
     
     <div class="preloader-content">
-      <div class="preloader-emblem">A</div>
+      <div class="preloader-emblem"><img src="assets/Logo.png" alt="Ambika Decoration Logo"></div>
       
       <h1 class="preloader-title" id="preloader-title">
         <span class="char char-gold" style="--i:0">A</span>
@@ -110,7 +114,7 @@ while (count($row2_images) < 10) {
   <header class="navbar" id="navbar">
     <div class="container navbar-container">
       <a href="#hero" class="brand-logo">
-        <div class="logo-emblem">A</div>
+        <div class="logo-emblem"><img src="assets/Logo.png" alt="Ambika Decoration Logo"></div>
         <div class="brand-text">
           <span class="brand-name">AMBIKA DECORATION</span>
           <span class="brand-tagline">POOJA FARM</span>
@@ -501,7 +505,7 @@ while (count($row2_images) < 10) {
   <footer class="footer">
     <div class="container footer-content">
       <div class="footer-brand">
-        <div class="logo-emblem">A</div>
+        <div class="logo-emblem"><img src="assets/Logo.png" alt="Ambika Decoration Logo"></div>
         <h3><?php echo strtoupper(SITE_NAME); ?></h3>
         <p>Your premier destination for party plot venue, royal chori/mandap decoration, gourmet veg catering, and end-to-end event management.</p>
       </div>
