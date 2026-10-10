@@ -1,6 +1,6 @@
 <?php
 /**
- * Ambika Decoration & Party Plot - PHP Inquiry API Endpoint
+ * Ambika Decoretors & Party Plot - PHP Inquiry API Endpoint
  */
 
 header('Content-Type: application/json');
@@ -19,6 +19,7 @@ if (!$input) {
 }
 
 $user_name = isset($input['user_name']) ? trim(filter_var($input['user_name'], FILTER_SANITIZE_STRING)) : '';
+$venue = isset($input['venue']) ? trim(filter_var($input['venue'], FILTER_SANITIZE_STRING)) : 'Pooja Farm';
 $event_type = isset($input['event_type']) ? trim(filter_var($input['event_type'], FILTER_SANITIZE_STRING)) : 'Wedding & Reception';
 $guest_count = isset($input['guest_count']) ? trim(filter_var($input['guest_count'], FILTER_SANITIZE_STRING)) : '500-1000 Guests';
 $event_date = isset($input['event_date']) ? trim(filter_var($input['event_date'], FILTER_SANITIZE_STRING)) : date('Y-m-d');
@@ -30,9 +31,10 @@ if (empty($user_name)) {
 }
 
 // Format WhatsApp Message
-$message = "Hello Ambika Decoration & Party Plot! 🌟\n";
+$message = "Hello Ambika Decoretors! 🌟\n";
 $message .= "My name is *" . $user_name . "*.\n\n";
 $message .= "I would like to inquire about event booking:\n";
+$message .= "• *Preferred Venue:* " . $venue . "\n";
 $message .= "• *Event Type:* " . $event_type . "\n";
 $message .= "• *Guests Count:* " . $guest_count . "\n";
 $message .= "• *Event Date:* " . $event_date . "\n";

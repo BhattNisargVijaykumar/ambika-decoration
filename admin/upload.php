@@ -2,44 +2,42 @@
 require_once __DIR__ . '/auth.php';
 check_admin_auth();
 
-$data_file = __DIR__ . '/../data/gallery.json';
-$upload_dir = __DIR__ . '/../assets/uploads/';
-
-if (!is_dir($upload_dir)) {
-    @mkdir($upload_dir, 0755, true);
-}
-
-// Load gallery JSON
-$gallery_data = ['row1' => [], 'row2' => []];
-if (file_exists($data_file)) {
-    $json = json_decode(file_get_contents($data_file), true);
-    if (is_array($json)) {
-        $gallery_data = array_merge($gallery_data, $json);
-    }
-}
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['work_image'])) {
-    $file = $_FILES['work_image'];
-    $target_row = isset($_POST['target_row']) ? $_POST['target_row'] : 'row1';
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['media_file'])) {
+    $file = $_FILES['media_file'];
+    $target_folder = isset($_POST['target_folder']) ? $_POST['target_folder'] : 'row1';
 
     if ($file['error'] === UPLOAD_ERR_OK) {
         $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
-        $allowed = ['jpg', 'jpeg', 'png', 'webp'];
+        
+        $image_exts = ['jpg', 'jpeg', 'png', 'webp'];
+        $video_exts = ['mp4', 'webm', 'mov', 'm4v'];
+
+        if ($target_folder === 'videos') {
+            $dest_dir = __DIR__ . '/../assets/videos/';
+            $allowed = array_merge($image_exts, $video_exts);
+        } elseif ($target_folder === 'catalog') {
+            $dest_dir = __DIR__ . '/../assets/images/catalog/';
+            $allowed = $image_exts;
+        } elseif ($target_folder === 'row2') {
+            $dest_dir = __DIR__ . '/../assets/images/row2/';
+            $allowed = $image_exts;
+        } else { // default row1
+            $dest_dir = __DIR__ . '/../assets/images/row1/';
+            $allowed = $image_exts;
+        }
+
+        if (!is_dir($dest_dir)) {
+            @mkdir($dest_dir, 0755, true);
+        }
 
         if (in_array($ext, $allowed)) {
-            $new_name = 'work_' . time() . '_' . rand(100, 999) . '.' . $ext;
-            $destination = $upload_dir . $new_name;
-            $relative_path = 'assets/uploads/' . $new_name;
+            $filename = 'media_' . time() . '_' . rand(100, 999) . '.' . $ext;
+            $destination = $dest_dir . $filename;
 
             if (move_uploaded_file($file['tmp_name'], $destination)) {
-                if ($target_row === 'row1' || $target_row === 'both') {
-                    $gallery_data['row1'][] = $relative_path;
-                }
-                if ($target_row === 'row2' || $target_row === 'both') {
-                    $gallery_data['row2'][] = $relative_path;
-                }
+                // Trigger static page build to keep HTML synced
+                @exec("php -r \"ob_start(); include '" . __DIR__ . "/../index.php'; file_put_contents('" . __DIR__ . "/../index.html', ob_get_clean()); ob_start(); include '" . __DIR__ . "/../gallery.php'; file_put_contents('" . __DIR__ . "/../gallery.html', ob_get_clean());\"");
 
-                file_put_contents($data_file, json_encode($gallery_data, JSON_PRETTY_PRINT));
                 header('Location: index.php?msg=success');
                 exit;
             } else {

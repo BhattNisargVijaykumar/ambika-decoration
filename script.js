@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Ambika Decoration & Party Plot - PHP API & JS Frontend Scripts
+   Ambika Decoretors & Party Plot - PHP API & JS Frontend Scripts
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -472,6 +472,8 @@ function initDefaultDate() {
 async function handleInquirySubmit(event) {
   event.preventDefault();
 
+  const venueEl = document.getElementById('venue-select');
+  const venue = venueEl ? venueEl.value : 'Pooja Farm';
   const eventType = document.getElementById('event-type').value;
   const guestCount = document.getElementById('guest-count').value;
   const eventDate = document.getElementById('event-date').value;
@@ -493,6 +495,7 @@ async function handleInquirySubmit(event) {
       },
       body: JSON.stringify({
         user_name: userName,
+        venue: venue,
         event_type: eventType,
         guest_count: guestCount,
         event_date: eventDate,
@@ -506,19 +509,19 @@ async function handleInquirySubmit(event) {
     if (data.success && data.whatsapp_url) {
       window.open(data.whatsapp_url, '_blank');
     } else {
-      fallbackWhatsAppRedirect(userName, eventType, guestCount, eventDate, notes, recipient);
+      fallbackWhatsAppRedirect(userName, venue, eventType, guestCount, eventDate, notes, recipient);
     }
   } catch (err) {
     console.warn('API Endpoint unreachable, using client-side WhatsApp generator:', err);
-    fallbackWhatsAppRedirect(userName, eventType, guestCount, eventDate, notes, recipient);
+    fallbackWhatsAppRedirect(userName, venue, eventType, guestCount, eventDate, notes, recipient);
   } finally {
     submitBtn.innerHTML = originalBtnText;
     submitBtn.disabled = false;
   }
 }
 
-function fallbackWhatsAppRedirect(userName, eventType, guestCount, eventDate, notes, recipient = '917567049869') {
-  const message = `Hello Ambika Decoration & Party Plot! 🌟\nMy name is *${userName}*.\n\nI would like to inquire about event booking:\n• *Event Type:* ${eventType}\n• *Guests Count:* ${guestCount}\n• *Event Date:* ${eventDate}\n${notes ? `• *Special Note:* ${notes}\n` : ''}\nPlease share packages & menu options. Thank you!`;
+function fallbackWhatsAppRedirect(userName, venue, eventType, guestCount, eventDate, notes, recipient = '917567049869') {
+  const message = `Hello Ambika Decoretors! 🌟\nMy name is *${userName}*.\n\nI would like to inquire about event booking:\n• *Preferred Venue:* ${venue}\n• *Event Type:* ${eventType}\n• *Guests Count:* ${guestCount}\n• *Event Date:* ${eventDate}\n${notes ? `• *Special Note:* ${notes}\n` : ''}\nPlease share packages & menu options. Thank you!`;
   const url = `https://wa.me/${recipient}?text=${encodeURIComponent(message)}`;
   window.open(url, '_blank');
 }

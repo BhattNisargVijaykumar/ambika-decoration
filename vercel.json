@@ -2,10 +2,29 @@
   "version": 2,
   "cleanUrls": true,
   "trailingSlash": false,
+  "functions": {
+    "api/**/*.php": {
+      "runtime": "@vercel/php"
+    },
+    "admin/**/*.php": {
+      "runtime": "@vercel/php"
+    },
+    "*.php": {
+      "runtime": "@vercel/php"
+    }
+  },
   "rewrites": [
     {
-      "source": "/",
-      "destination": "/index.html"
+      "source": "/admin",
+      "destination": "/admin/index.php"
+    },
+    {
+      "source": "/admin/",
+      "destination": "/admin/index.php"
+    },
+    {
+      "source": "/admin/:path*",
+      "destination": "/admin/:path*"
     }
   ]
 }

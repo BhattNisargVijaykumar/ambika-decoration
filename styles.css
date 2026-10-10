@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Ambika Decoration & Party Plot - Master Design System & Custom Animations
+   Ambika Decoretors & Party Plot - Master Design System & Custom Animations
    ========================================================================== */
 
 :root {
@@ -67,13 +67,27 @@ html {
   width: 100vw;
   height: 100vh;
   background-color: #07090e;
-  z-index: 10000;
+  z-index: 99999 !important;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   transition: transform 0.85s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.85s cubic-bezier(0.77, 0, 0.175, 1);
   will-change: transform, opacity;
+}
+
+body:not(.preloader-complete) .navbar,
+body:not(.preloader-complete) .floating-actions,
+body:not(.preloader-complete) .mobile-bottom-bar {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+.navbar,
+.floating-actions,
+.mobile-bottom-bar {
+  transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
 .preloader.preloader-hide {
@@ -873,7 +887,20 @@ a {
   opacity: 1;
 }
 
-/* Party Plot Section */
+/* Party Plot / Venues Section */
+.venues-main-featured {
+  margin-bottom: 25px;
+}
+.venues-sider-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+}
+@media (max-width: 768px) {
+  .venues-sider-grid {
+    grid-template-columns: 1fr;
+  }
+}
 .party-plot-grid {
   display: grid;
   grid-template-columns: 1.4fr 1fr;
@@ -1963,9 +1990,9 @@ input:focus, select:focus, textarea:focus {
   .metric-label {
     font-size: 0.72rem;
   }
-  .floating-actions { bottom: 75px; right: 16px; }
+  .floating-actions { bottom: 20px; right: 16px; }
   .float-tooltip { display: none; }
-  .mobile-bottom-bar { display: flex; }
+  .mobile-bottom-bar { display: none !important; }
   .section { padding: 20px 0 !important; }
   .section-header { margin-bottom: 14px !important; }
   .section-title { font-size: 1.75rem; margin-bottom: 8px; }

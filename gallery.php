@@ -1,0 +1,540 @@
+<?php
+require_once __DIR__ . '/config.php';
+
+// Helper function to scan directory for files with given extensions
+function scanMediaDir($dirPath, $relPrefix, $extensions) {
+    $files = [];
+    if (is_dir($dirPath)) {
+        foreach (scandir($dirPath) as $f) {
+            if ($f !== '.' && $f !== '..') {
+                $ext = strtolower(pathinfo($f, PATHINFO_EXTENSION));
+                if (in_array($ext, $extensions)) {
+                    $files[] = [
+                        'src' => $relPrefix . '/' . $f,
+                        'name' => pathinfo($f, PATHINFO_FILENAME)
+                    ];
+                }
+            }
+        }
+    }
+    return $files;
+}
+
+$catalog_photos = scanMediaDir(__DIR__ . '/assets/images/catalog', 'assets/images/catalog', ['jpg', 'jpeg', 'png', 'webp']);
+$row1_photos = scanMediaDir(__DIR__ . '/assets/images/row1', 'assets/images/row1', ['jpg', 'jpeg', 'png', 'webp']);
+$row2_photos = scanMediaDir(__DIR__ . '/assets/images/row2', 'assets/images/row2', ['jpg', 'jpeg', 'png', 'webp']);
+$root_photos = scanMediaDir(__DIR__ . '/assets/images', 'assets/images', ['jpg', 'jpeg', 'png', 'webp']);
+
+// Combine all photos
+$photo_files = array_merge($catalog_photos, $row1_photos, $row2_photos, $root_photos);
+
+// Scan assets/videos folder
+$video_files_scanned = scanMediaDir(__DIR__ . '/assets/videos', 'assets/videos', ['mp4', 'webm', 'mov', 'm4v']);
+
+// Sample showcase videos fallback if folder has no videos yet
+$video_files = [];
+foreach ($video_files_scanned as $v) {
+    $video_files[] = [
+        'title' => ucwords(str_replace(['_', '-'], ' ', $v['name'])),
+        'src' => $v['src'],
+        'poster' => 'assets/images/mandap_entrance_gate.jpg',
+        'desc' => 'Live Event Video Footage'
+    ];
+}
+
+if (empty($video_files)) {
+    $video_files = [
+        [
+            'title' => 'Grand Mandap & Entrance Lightings Reel',
+            'poster' => 'assets/images/mandap_entrance_gate.jpg',
+            'src' => 'assets/images/mandap_entrance_gate.jpg',
+            'desc' => 'Royal fairy light tunnel and grand entrance gate lighting walk-through.'
+        ],
+        [
+            'title' => 'Spacious Party Plot & Night Ambiance',
+            'poster' => 'assets/images/party_plot_lawn.jpg',
+            'src' => 'assets/images/party_plot_lawn.jpg',
+            'desc' => 'Overhead chandelier glow and lawn seating layout view.'
+        ],
+        [
+            'title' => 'Royal Sangeet Stage & Floral Setup',
+            'poster' => 'assets/images/sangeet_stage_decor.jpg',
+            'src' => 'assets/images/sangeet_stage_decor.jpg',
+            'desc' => 'Gold filigree backdrop stage decoration and spotlight effects.'
+        ],
+        [
+            'title' => 'Traditional Chori Mandap Setup',
+            'poster' => 'assets/images/wedding_chori_mandap.jpg',
+            'src' => 'assets/images/wedding_chori_mandap.jpg',
+            'desc' => 'Authentic sacred Chori Mandap with fresh flower garlands.'
+        ],
+        [
+            'title' => 'Gourmet Veg Catering & Live Counter Setup',
+            'poster' => 'assets/images/catering_buffet.jpg',
+            'src' => 'assets/images/catering_buffet.jpg',
+            'desc' => 'Live food counters, thali service, and dessert presentations.'
+        ],
+        [
+            'title' => 'Gujarati Sweets & Dessert Fountain Showcase',
+            'poster' => 'assets/images/catering_sweets.jpg',
+            'src' => 'assets/images/catering_sweets.jpg',
+            'desc' => 'Jalebi Rabdi live station and Royal Basundi display.'
+        ]
+    ];
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Complete Work Catalog & Gallery | <?php echo SITE_NAME; ?></title>
+  <meta name="description" content="Explore complete photos and videos catalog of Ambika Decoretors & Party Plot - Mandap setup, stage decor, illuminations & gourmet catering.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/Logo.png">
+  
+  <!-- Master Styles -->
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .gallery-page-header {
+      padding: 110px 0 25px 0;
+      text-align: center;
+      background: radial-gradient(circle at center, rgba(212, 175, 55, 0.12) 0%, rgba(9, 12, 18, 0.96) 70%);
+      border-bottom: 1px solid var(--border-gold);
+    }
+    .gallery-filter-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 25px 0 10px 0;
+      flex-wrap: wrap;
+    }
+    .gallery-tab-btn {
+      background: rgba(19, 25, 36, 0.85);
+      border: 1px solid var(--border-gold);
+      color: var(--text-main);
+      padding: 12px 28px;
+      border-radius: var(--radius-pill);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition-normal);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .gallery-tab-btn i {
+      color: var(--gold-primary);
+    }
+    .gallery-tab-btn.active, .gallery-tab-btn:hover {
+      background: var(--gold-gradient);
+      color: #0b0e14;
+      border-color: var(--gold-primary);
+      box-shadow: 0 0 22px rgba(212, 175, 55, 0.45);
+    }
+    .gallery-tab-btn.active i, .gallery-tab-btn:hover i {
+      color: #0b0e14;
+    }
+
+    /* Dynamic Masonry Auto-Fit Grid */
+    .gallery-masonry-grid {
+      column-count: 4;
+      column-gap: 20px;
+      padding: 30px 0;
+    }
+
+    @media (max-width: 1100px) {
+      .gallery-masonry-grid {
+        column-count: 3;
+        column-gap: 16px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .gallery-page-header {
+        padding: 65px 10px 15px 10px;
+      }
+      .gallery-page-header .section-subtitle {
+        font-size: 0.75rem;
+        padding: 4px 10px;
+        margin-bottom: 6px;
+      }
+      .gallery-page-header .section-title {
+        font-size: 1.25rem;
+        line-height: 1.25;
+        margin-bottom: 6px;
+      }
+      .gallery-page-header .section-description {
+        font-size: 0.78rem;
+        line-height: 1.35;
+        margin: 0 auto;
+        max-width: 96%;
+      }
+      .gallery-filter-tabs {
+        flex-wrap: nowrap;
+        gap: 6px;
+        margin: 12px 0 5px 0;
+      }
+      .gallery-tab-btn {
+        flex: 1;
+        padding: 8px 6px;
+        font-size: 0.76rem;
+        gap: 5px;
+        justify-content: center;
+        white-space: nowrap;
+      }
+      .gallery-tab-btn i {
+        font-size: 0.85rem;
+      }
+      .gallery-masonry-grid {
+        column-count: 2;
+        column-gap: 10px;
+        padding: 15px 0;
+      }
+      .gallery-media-card {
+        margin-bottom: 10px;
+        border-radius: 8px;
+      }
+      .gallery-card-overlay {
+        padding: 8px;
+      }
+      .gallery-card-title {
+        font-size: 0.78rem;
+        margin-bottom: 2px;
+      }
+      .gallery-card-sub {
+        font-size: 0.68rem;
+      }
+      .video-play-badge {
+        width: 36px;
+        height: 36px;
+        font-size: 0.95rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .gallery-page-header {
+        padding: 60px 8px 12px 8px;
+      }
+      .gallery-page-header .section-title {
+        font-size: 1.15rem;
+      }
+      .gallery-tab-btn {
+        padding: 7px 4px;
+        font-size: 0.72rem;
+        gap: 4px;
+      }
+      .gallery-masonry-grid {
+        column-count: 2;
+        column-gap: 8px;
+        padding: 10px 0;
+      }
+      .gallery-media-card {
+        margin-bottom: 8px;
+        border-radius: 6px;
+      }
+    }
+
+    .gallery-media-card {
+      break-inside: avoid;
+      margin-bottom: 25px;
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--border-gold);
+      background: var(--bg-card);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      cursor: pointer;
+      display: inline-block;
+      width: 100%;
+    }
+    .gallery-media-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 15px 35px rgba(212, 175, 55, 0.3);
+      border-color: var(--gold-primary);
+    }
+    .gallery-media-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+    .gallery-media-card:hover img {
+      transform: scale(1.05);
+    }
+    .gallery-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, rgba(9, 12, 18, 0.92) 0%, rgba(9, 12, 18, 0.25) 60%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 20px;
+    }
+    .gallery-media-card:hover .gallery-card-overlay {
+      opacity: 1;
+    }
+    .gallery-card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .gallery-card-sub {
+      font-size: 0.82rem;
+      color: var(--gold-light);
+    }
+    .video-play-badge {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--gold-gradient);
+      color: #0b0e14;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      box-shadow: 0 0 25px rgba(212, 175, 55, 0.8);
+      transition: transform 0.3s ease;
+    }
+    .gallery-media-card:hover .video-play-badge {
+      transform: translate(-50%, -50%) scale(1.15);
+    }
+
+    .load-more-box {
+      text-align: center;
+      margin: 20px 0 60px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Canvas -->
+  <canvas id="sparkle-canvas"></canvas>
+  <div class="flower-petals-container" id="flower-petals"></div>
+
+  <!-- Header / Navbar -->
+  <header class="navbar" id="navbar" style="position: fixed; top: 0; width: 100%; z-index: 100;">
+    <div class="container navbar-container">
+      <a href="index.html" class="brand-logo">
+        <div class="logo-emblem"><img src="assets/Logo.png" alt="Ambika Decoretors Logo"></div>
+        <div class="brand-text">
+          <span class="brand-name">AMBIKA DECORETORS</span>
+          <span class="brand-tagline">EVENT PLANNER & MANAGEMENT</span>
+        </div>
+      </a>
+
+      <div>
+        <a href="index.html" class="btn btn-ghost-sm" style="border: 1px solid var(--border-gold); padding: 6px 14px; font-size: 0.82rem; border-radius: 20px; color: var(--gold-light);">
+          <i class="fa-solid fa-house"></i> Main Website
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Gallery Header Banner -->
+  <section class="gallery-page-header">
+    <div class="container">
+      <!-- Top Back to Main Website Button -->
+      <div class="gallery-top-back-bar" style="margin-bottom: 12px; text-align: center;">
+        <a href="index.html" class="btn-back-home" style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 18px; background: rgba(212, 175, 55, 0.15); border: 1px solid var(--border-gold); color: var(--gold-light); border-radius: 30px; font-size: 0.8rem; font-weight: 600; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.4);">
+          <i class="fa-solid fa-arrow-left"></i> Go To Main Website
+        </a>
+      </div>
+
+      <span class="section-subtitle"><i class="fa-solid fa-folder-open icon-gold"></i> Official Work Catalog</span>
+      <h1 class="section-title">Explore Our <span class="text-gradient">Complete Catalog</span></h1>
+      
+      <p class="section-description" style="max-width: 750px; margin: 0 auto;">
+        Browse our full catalog of images and video reels done by us.
+      </p>
+
+      <!-- Top 2 Filter Tabs -->
+      <div class="gallery-filter-tabs">
+        <button class="gallery-tab-btn active" id="tab-btn-photos" onclick="switchTab('photos')">
+          <i class="fa-solid fa-images"></i> Images Catalog
+        </button>
+        <button class="gallery-tab-btn" id="tab-btn-videos" onclick="switchTab('videos')">
+          <i class="fa-solid fa-film"></i> Videos Catalog
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Media Grid Section -->
+  <section class="section">
+    <div class="container">
+      <!-- Photos Grid -->
+      <div id="photos-section">
+        <div class="gallery-masonry-grid" id="photos-grid">
+          <!-- Dynamically Rendered Photos via JS Lazy Load -->
+        </div>
+
+        <div class="load-more-box" id="photos-load-more-container">
+          <button class="btn btn-gold glow-effect" id="btn-load-more-photos" onclick="loadMorePhotos()">
+            <i class="fa-solid fa-plus-circle"></i> Load More Catalog Images
+          </button>
+        </div>
+      </div>
+
+      <!-- Videos Grid -->
+      <div id="videos-section" style="display: none;">
+        <div class="gallery-masonry-grid" id="videos-grid">
+          <!-- Dynamically Rendered Videos -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-bottom text-center">
+      <p>&copy; <?php echo date('Y'); ?> Ambika Decoretors. All rights reserved to Ambika Decoretors - Dahegam.</p>
+    </div>
+  </footer>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox-modal" id="lightbox-modal">
+    <div class="lightbox-content">
+      <button class="lightbox-close" id="lightbox-close">&times;</button>
+      <img src="" alt="" id="lightbox-img">
+      <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
+  </div>
+
+  <script>
+    // All photo items loaded from assets/images/row1 and assets/images/row2
+    const allPhotos = <?php echo json_encode($photo_files); ?>;
+    const allVideos = <?php echo json_encode($video_files); ?>;
+
+    let photoBatchIndex = 0;
+    const batchSize = 12;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadMorePhotos();
+      renderVideos();
+      initLightbox();
+    });
+
+    function switchTab(type) {
+      const tabPhotos = document.getElementById('tab-btn-photos');
+      const tabVideos = document.getElementById('tab-btn-videos');
+      const photosSec = document.getElementById('photos-section');
+      const videosSec = document.getElementById('videos-section');
+
+      if (type === 'photos') {
+        tabPhotos.classList.add('active');
+        tabVideos.classList.remove('active');
+        photosSec.style.display = 'block';
+        videosSec.style.display = 'none';
+      } else {
+        tabVideos.classList.add('active');
+        tabPhotos.classList.remove('active');
+        videosSec.style.display = 'block';
+        photosSec.style.display = 'none';
+      }
+    }
+
+    function loadMorePhotos() {
+      const grid = document.getElementById('photos-grid');
+      const nextBatch = allPhotos.slice(photoBatchIndex, photoBatchIndex + batchSize);
+
+      nextBatch.forEach((item) => {
+        const card = document.createElement('div');
+        card.className = 'gallery-media-card glass-card btn-lightbox-trigger';
+        card.setAttribute('data-img', item.src);
+        card.setAttribute('data-caption', 'Ambika Decoretors Catalog Image');
+
+        card.innerHTML = `
+          <img src="${item.src}" alt="Catalog Photo" loading="lazy">
+          <div class="gallery-card-overlay">
+            <div class="gallery-card-title">Ambika Catalog Photo</div>
+            <div class="gallery-card-sub"><i class="fa-solid fa-magnifying-glass-plus icon-gold"></i> Click to View</div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+
+      photoBatchIndex += batchSize;
+
+      const loadBtn = document.getElementById('photos-load-more-container');
+      if (photoBatchIndex >= allPhotos.length) {
+        loadBtn.style.display = 'none';
+      } else {
+        loadBtn.style.display = 'block';
+      }
+
+      // Re-attach lightbox listeners
+      initLightbox();
+    }
+
+    function renderVideos() {
+      const grid = document.getElementById('videos-grid');
+      grid.innerHTML = '';
+
+      allVideos.forEach((v) => {
+        const card = document.createElement('div');
+        card.className = 'gallery-media-card glass-card';
+        card.onclick = () => {
+          if (v.src && (v.src.endsWith('.mp4') || v.src.endsWith('.webm'))) {
+            window.open(v.src, '_blank');
+          } else {
+            alert('Video Showcase: ' + v.title + '\n' + v.desc);
+          }
+        };
+
+        card.innerHTML = `
+          <img src="${v.poster}" alt="${v.title}" loading="lazy">
+          <div class="video-play-badge"><i class="fa-solid fa-play"></i></div>
+          <div class="gallery-card-overlay" style="opacity: 1; background: linear-gradient(0deg, rgba(9,12,18,0.95) 0%, rgba(9,12,18,0.4) 100%);">
+            <div class="gallery-card-title"><i class="fa-solid fa-video icon-gold"></i> ${v.title}</div>
+            <div class="gallery-card-sub">${v.desc}</div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function initLightbox() {
+      const modal = document.getElementById('lightbox-modal');
+      const modalImg = document.getElementById('lightbox-img');
+      const modalCaption = document.getElementById('lightbox-caption');
+      const closeBtn = document.getElementById('lightbox-close');
+
+      document.querySelectorAll('.btn-lightbox-trigger').forEach(trigger => {
+        trigger.onclick = () => {
+          const imgSrc = trigger.getAttribute('data-img');
+          const caption = trigger.getAttribute('data-caption') || '';
+          modalImg.src = imgSrc;
+          modalCaption.textContent = caption;
+          modal.classList.add('active');
+        };
+      });
+
+      if (closeBtn) {
+        closeBtn.onclick = () => modal.classList.remove('active');
+      }
+      if (modal) {
+        modal.onclick = (e) => {
+          if (e.target === modal) modal.classList.remove('active');
+        };
+      }
+    }
+  </script>
+</body>
+</html>

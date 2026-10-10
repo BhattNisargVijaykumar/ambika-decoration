@@ -1,20 +1,43 @@
 <?php
 require_once __DIR__ . '/config.php';
 
-// Dynamic Gallery Loader from Admin Uploads JSON
-$data_file = __DIR__ . '/data/gallery.json';
+// Dynamic Gallery Loader from assets/images/row1 and assets/images/row2
+$row1_dir = __DIR__ . '/assets/images/row1';
+$row2_dir = __DIR__ . '/assets/images/row2';
 $row1_images = [];
 $row2_images = [];
 
-if (file_exists($data_file)) {
-    $json = json_decode(file_get_contents($data_file), true);
-    if (is_array($json)) {
-        if (!empty($json['row1'])) $row1_images = $json['row1'];
-        if (!empty($json['row2'])) $row2_images = $json['row2'];
+if (is_dir($row1_dir)) {
+    foreach (scandir($row1_dir) as $f) {
+        if ($f !== '.' && $f !== '..' && preg_match('/\.(jpg|jpeg|png|webp)$/i', $f)) {
+            $row1_images[] = 'assets/images/row1/' . $f;
+        }
     }
 }
 
-// Fallback sample images if no custom admin uploads yet
+if (is_dir($row2_dir)) {
+    foreach (scandir($row2_dir) as $f) {
+        if ($f !== '.' && $f !== '..' && preg_match('/\.(jpg|jpeg|png|webp)$/i', $f)) {
+            $row2_images[] = 'assets/images/row2/' . $f;
+        }
+    }
+}
+
+// Merge with admin uploads from data/gallery.json if present
+$data_file = __DIR__ . '/data/gallery.json';
+if (file_exists($data_file)) {
+    $json = json_decode(file_get_contents($data_file), true);
+    if (is_array($json)) {
+        if (!empty($json['row1']) && is_array($json['row1'])) {
+            $row1_images = array_merge($row1_images, $json['row1']);
+        }
+        if (!empty($json['row2']) && is_array($json['row2'])) {
+            $row2_images = array_merge($row2_images, $json['row2']);
+        }
+    }
+}
+
+// Fallbacks if folders are empty
 if (empty($row1_images)) {
     $row1_images = array_fill(0, 10, 'assets/images/wedding_chori_mandap.jpg');
 }
@@ -61,7 +84,7 @@ while (count($row2_images) < 10) {
     <div class="preloader-bg-glow glow-bottom-right"></div>
     
     <div class="preloader-content">
-      <div class="preloader-emblem"><img src="assets/Logo.png" alt="Ambika Decoration Logo"></div>
+      <div class="preloader-emblem"><img src="assets/Logo.png" alt="Ambika Decoretors Logo"></div>
       
       <h1 class="preloader-title" id="preloader-title">
         <span class="char char-gold" style="--i:0">A</span>
@@ -76,14 +99,14 @@ while (count($row2_images) < 10) {
         <span class="char" style="--i:8">C</span>
         <span class="char" style="--i:9">O</span>
         <span class="char" style="--i:10">R</span>
-        <span class="char" style="--i:11">A</span>
+        <span class="char" style="--i:11">E</span>
         <span class="char" style="--i:12">T</span>
-        <span class="char" style="--i:13">I</span>
-        <span class="char" style="--i:14">O</span>
-        <span class="char" style="--i:15">N</span>
+        <span class="char" style="--i:13">O</span>
+        <span class="char" style="--i:14">R</span>
+        <span class="char" style="--i:15">S</span>
       </h1>
       
-      <p class="preloader-subtitle">ROYAL CELEBRATIONS • POOJA FARM</p>
+      <p class="preloader-subtitle">ROYAL CELEBRATIONS</p>
       
       <div class="preloader-progress-box">
         <div class="preloader-bar-bg">
@@ -103,21 +126,20 @@ while (count($row2_images) < 10) {
 
   <nav class="nav-menu" id="nav-menu">
     <div class="bottom-sheet-handle"></div>
-    <a href="#party-plot" class="nav-link"><i class="fa-solid fa-hotel"></i> Party Plot Venue</a>
-    <a href="#chori-decor" class="nav-link"><i class="fa-solid fa-om"></i> Chori & Mandap</a>
+    <a href="#party-plot" class="nav-link"><i class="fa-solid fa-hotel"></i> Event Venues</a>
+    <a href="#chori-decor" class="nav-link"><i class="fa-solid fa-palette"></i> Our Work</a>
     <a href="#catering-menu" class="nav-link"><i class="fa-solid fa-utensils"></i> Catering Menu</a>
     <a href="#inquiry-section" class="nav-link"><i class="fa-solid fa-address-book"></i> Contact Us</a>
-    <a href="#inquiry-section" class="nav-link btn-nav-cta"><i class="fa-brands fa-whatsapp"></i> Quick Inquiry</a>
   </nav>
 
   <!-- Header / Navigation -->
   <header class="navbar" id="navbar">
     <div class="container navbar-container">
       <a href="#hero" class="brand-logo">
-        <div class="logo-emblem"><img src="assets/Logo.png" alt="Ambika Decoration Logo"></div>
+        <div class="logo-emblem"><img src="assets/Logo.png" alt="Ambika Decoretors Logo"></div>
         <div class="brand-text">
-          <span class="brand-name">AMBIKA DECORATION</span>
-          <span class="brand-tagline">POOJA FARM</span>
+          <span class="brand-name">AMBIKA DECORETORS</span>
+          <span class="brand-tagline">EVENT PLANNER & MANAGEMENT</span>
         </div>
       </a>
 
@@ -135,7 +157,7 @@ while (count($row2_images) < 10) {
         <i class="fa-solid fa-crown icon-gold"></i> <?php echo SITE_TAGLINE; ?>
       </div>
       <h1 class="hero-title fade-in delay-1">
-        Crafting Unforgettable <span class="text-gradient">Royal Celebrations</span> & Weddings
+        Crafting Unforgettable <span class="text-gradient">Royal Celebrations</span> & Events
       </h1>
       <p class="hero-subtitle fade-in delay-2">
         Spacious Party Plot • Authentic Traditional Chori & Mandap Setup • 100% Pure Veg Gourmet Catering • Full Party Event Management
@@ -178,50 +200,95 @@ while (count($row2_images) < 10) {
   </section>
 
   <!-- Section 1: Party Plot Venue (Zoom-In Opening Animation) -->
+  <!-- Section 1: Event Venues (Main & Sider Venues) -->
   <section class="section party-plot-section" id="party-plot">
     <div class="container">
       <div class="section-header text-center scroll-zoom-in">
-        <span class="section-subtitle"><i class="fa-solid fa-gem icon-gold"></i> Our Exclusive Venue</span>
-        <h2 class="section-title">Ambika Party Plot <span class="text-gradient">& Open Lawn</span></h2>
+        <span class="section-subtitle"><i class="fa-solid fa-gem icon-gold"></i> Our Exclusive Venues</span>
+        <h2 class="section-title">Explore Our <span class="text-gradient">3 Celebration Venues</span></h2>
         <p class="section-description">
-          A magnificent sprawling open-air green lawn bathed in warm fairytale lightings, designer entrance tunnels, and royal ambiance designed for your dream wedding & reception.
+          From our flagship Pooja Farm to our associate resort & party plot, we offer magnificent venues designed for your dream wedding, sangeet, and grand reception.
         </p>
       </div>
 
-      <div class="party-plot-grid">
-        <div class="party-plot-main-card glass-card scroll-reveal">
-          <div class="image-wrapper">
-            <img src="assets/images/party_plot_lawn.jpg" alt="Ambika Party Plot Night View" class="showcase-img">
-            <div class="img-badge"><i class="fa-solid fa-star"></i> Night Lightings Setup</div>
+      <!-- Main Featured Venue (Pooja Farm) -->
+      <div class="venues-main-featured">
+        <div class="party-plot-main-card glass-card scroll-reveal" style="border: 2px solid var(--border-gold-bright);">
+          <div class="image-wrapper" style="height: 380px;">
+            <img src="assets/images/party_plot_lawn.jpg" alt="Pooja Farm Venue" class="showcase-img">
+            <div class="img-badge"><i class="fa-solid fa-crown icon-gold"></i> Flagship Open Lawn</div>
           </div>
           <div class="card-content">
-            <h3>Illuminated Lawn & Dining Setup</h3>
-            <p>Our venue features lush carpet grass, grand chandelier overheads, sparkling fairy light tunnels, and comfortable seating layouts for over 2,500+ guests simultaneously.</p>
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 12px;">
+              <h3 style="margin-bottom: 0;">Pooja Farm</h3>
+              <span class="img-badge" style="position: static;"><i class="fa-solid fa-users icon-gold"></i> 4,500+ Guest Capacity</span>
+            </div>
+            <p>A sprawling open-air green lawn bathed in warm fairytale lightings, grand chandelier overheads, designer entrance tunnels, and royal ambiance for grand celebrations.</p>
             <ul class="feature-checklist">
-              <li><i class="fa-solid fa-check-circle icon-gold"></i> Spacious Open-Air Lawn with Natural Greenery</li>
-              <li><i class="fa-solid fa-check-circle icon-gold"></i> Premium AC Bridal & Groom Changing Suites</li>
-              <li><i class="fa-solid fa-check-circle icon-gold"></i> 200+ Car Parking Space with Security</li>
+              <li><i class="fa-solid fa-check-circle icon-gold"></i> Spacious Open Lawn with Natural Greenery</li>
+              <li><i class="fa-solid fa-check-circle icon-gold"></i> Premium Air-Conditioned Bridal & Groom Suites</li>
+              <li><i class="fa-solid fa-check-circle icon-gold"></i> 300+ Car Parking Area with Dedicated Security</li>
               <li><i class="fa-solid fa-check-circle icon-gold"></i> 100% Uninterrupted Power Backup Generator</li>
             </ul>
             <div class="action-row">
-              <a href="https://wa.me/<?php echo WHATSAPP_NUMBER; ?>?text=Hi%20Ambika%20Decoration,%20I%20want%20to%20inquire%20about%20Party%20Plot%20Rental%20dates" target="_blank" class="btn btn-whatsapp-sm">
-                <i class="fa-brands fa-whatsapp"></i> Inquire Plot Booking
+              <a href="https://wa.me/<?php echo WHATSAPP_NUMBER_1; ?>?text=Hi%20Ambika%20Decoretors,%20I%20want%20to%20inquire%20about%20Pooja%20Farm%20Venue%20booking" target="_blank" rel="noopener" class="btn btn-whatsapp-sm">
+                <i class="fa-brands fa-whatsapp"></i> Inquire Pooja Farm
               </a>
-              <a href="tel:<?php echo BUSINESS_PHONE_RAW; ?>" class="btn btn-ghost-sm">
-                <i class="fa-solid fa-phone"></i> Call Venue Manager
+              <a href="https://www.google.com/maps/place/Pooja+Farm+and+Party+Plot/@23.1546425,72.7954944,48m/data=!3m1!1e3!4m14!1m7!3m6!1s0x395e7f0023496d85:0x23764e73e51d3d71!2sPooja+Farm,+Dahegam!8m2!3d23.1569018!4d72.7945838!16s%2Fg%2F11vx3byycg!3m5!1s0x395e7fea80e06cbf:0xfa676d91a330a0a!8m2!3d23.1545661!4d72.7955986!16s%2Fg%2F11jst34wxq?entry=ttu&g_ep=EgoyMDI2MTAwNy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" class="btn btn-ghost-sm">
+                <i class="fa-solid fa-location-dot icon-gold"></i> Get Directions
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Associate Venues Grid (Malhar Exotica & Mangalyam Party Plot) -->
+      <div class="venues-sider-grid">
+        <!-- Venue 2: Malhar Exotica & Resort -->
+        <div class="party-plot-sub-card glass-card scroll-reveal delay-1">
+          <div class="image-wrapper" style="height: 260px;">
+            <img src="assets/images/sangeet_stage_decor.jpg" alt="Malhar Exotica & Resort" class="showcase-img">
+            <div class="img-badge"><i class="fa-solid fa-hotel icon-gold"></i> Resort & Lawn</div>
+          </div>
+          <div class="card-content">
+            <h3>Malhar Exotica & Resort</h3>
+            <p>Exotic resort ambiance featuring luxurious stay rooms, poolside lawn, elegant sangeet stage setup, and outdoor party space.</p>
+            <ul class="feature-checklist">
+              <li><i class="fa-solid fa-check-circle icon-gold"></i> Resort Stay Rooms & Poolside Party Lawn</li>
+              <li><i class="fa-solid fa-check-circle icon-gold"></i> Ideal for Sangeet, Mehendi & Receptions</li>
+            </ul>
+            <div class="action-row">
+              <a href="https://wa.me/<?php echo WHATSAPP_NUMBER_1; ?>?text=Hi%20Ambika%20Decoretors,%20I%20want%20to%20inquire%20about%20Malhar%20Exotica%20Resort" target="_blank" rel="noopener" class="btn btn-whatsapp-sm">
+                <i class="fa-brands fa-whatsapp"></i> Inquire Malhar Exotica
+              </a>
+              <a href="https://www.google.com/maps/place/Malhaar+Resort/@23.1256917,72.826033,321m/data=!3m1!1e3!4m9!3m8!1s0x395e7917fe900127:0x823eb7d667f3ff2a!5m2!4m1!1i2!8m2!3d23.125609!4d72.828147!16s%2Fg%2F11zyrngbch?entry=ttu&g_ep=EgoyMDI2MTAwNy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" class="btn btn-ghost-sm">
+                <i class="fa-solid fa-location-dot icon-gold"></i> Get Directions
               </a>
             </div>
           </div>
         </div>
 
-        <div class="party-plot-sub-card glass-card scroll-reveal delay-1">
-          <div class="image-wrapper">
-            <img src="assets/images/sangeet_stage_decor.jpg" alt="Royal Sangeet Stage Decor" class="showcase-img">
-            <div class="img-badge"><i class="fa-solid fa-crown"></i> Stage Decor</div>
+        <!-- Venue 3: Mangalyam Party Plot -->
+        <div class="party-plot-sub-card glass-card scroll-reveal delay-2">
+          <div class="image-wrapper" style="height: 260px;">
+            <img src="assets/images/wedding_chori_mandap.jpg" alt="Mangalyam Party Plot" class="showcase-img">
+            <div class="img-badge"><i class="fa-solid fa-archway icon-gold"></i> Party Plot</div>
           </div>
           <div class="card-content">
-            <h3>Grand Stage & Sangeet Backdrop</h3>
-            <p>Custom theme stages featuring gold filigree lattice arches, plush velvet drapes, ambient spotlights, and floral arrangements.</p>
+            <h3>Mangalyam Party Plot</h3>
+            <p>Spacious party lawn with grand entrance arches, authentic Mandap/Chori setup space, and dedicated buffet dining layout.</p>
+            <ul class="feature-checklist">
+              <li><i class="fa-solid fa-check-circle icon-gold"></i> Traditional Mandap & Chori Setup Area</li>
+              <li><i class="fa-solid fa-check-circle icon-gold"></i> Large Live Counter & Catering Dining Space</li>
+            </ul>
+            <div class="action-row">
+              <a href="https://wa.me/<?php echo WHATSAPP_NUMBER_1; ?>?text=Hi%20Ambika%20Decoretors,%20I%20want%20to%20inquire%20about%20Mangalyam%20Party%20Plot" target="_blank" rel="noopener" class="btn btn-whatsapp-sm">
+                <i class="fa-brands fa-whatsapp"></i> Inquire Mangalyam Plot
+              </a>
+              <a href="https://www.google.com/maps/place/Mangalyam+party+plot/@23.2845537,72.7600445,160m/data=!3m1!1e3!4m14!1m7!3m6!1s0x395dd39c4623a537:0xe6a37ddc88009e4a!2sGiyod+Ambaji+Mata+Temple!8m2!3d23.2838496!4d72.7607659!16s%2Fg%2F11bwqfsxm3!3m5!1s0x395dd30057b358f9:0xe5786a84d195491d!8m2!3d23.284603!4d72.7612381!16s%2Fg%2F11vz3r6s92?entry=ttu&g_ep=EgoyMDI2MTAwNy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" class="btn btn-ghost-sm">
+                <i class="fa-solid fa-location-dot icon-gold"></i> Get Directions
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -235,7 +302,7 @@ while (count($row2_images) < 10) {
         <span class="section-subtitle"><i class="fa-solid fa-images icon-gold"></i> Visual Portfolio</span>
         <h2 class="section-title">View Our <span class="text-gradient">Decor & Event Work</span></h2>
         <p class="section-description">
-          Explore our signature Mandap Chori setups, party plot illuminations, stage backdrops, and catering spreads.
+          Explore our signature event setups, party plot illuminations, stage backdrops, and grand entry gates.
         </p>
       </div>
 
@@ -265,8 +332,8 @@ while (count($row2_images) < 10) {
       </div>
       
       <div class="text-center margin-top-lg">
-        <a href="https://wa.me/<?php echo WHATSAPP_NUMBER; ?>?text=Hi%20Ambika%20Decoration,%20I%20want%20to%20see%20more%20Chori%20Mandap%20designs" target="_blank" class="btn btn-whatsapp glow-effect">
-          <i class="fa-brands fa-whatsapp"></i> Request Custom Decor Photo Catalogue on WhatsApp
+        <a href="gallery.php" class="btn btn-gold glow-effect" style="font-size: 1.05rem; padding: 14px 32px;">
+          <i class="fa-solid fa-folder-open"></i> Open Full Work Catalog & Gallery
         </a>
       </div>
     </div>
@@ -327,41 +394,7 @@ while (count($row2_images) < 10) {
         </div>
       </div>
 
-      <!-- Dynamic Catering Menu Tabs with Zoom Animation -->
-      <div class="menu-tab-container glass-card scroll-reveal">
-        <div class="menu-tab-header">
-          <?php $is_first = true; foreach ($catering_menu as $key => $cat): ?>
-            <button class="menu-tab-btn <?php echo $is_first ? 'active' : ''; ?>" data-tab="<?php echo $key; ?>">
-              <i class="<?php echo $cat['icon']; ?>"></i> <?php echo $cat['title']; ?>
-            </button>
-          <?php $is_first = false; endforeach; ?>
-        </div>
 
-        <div class="menu-tab-content">
-          <?php $is_first_pane = true; foreach ($catering_menu as $key => $cat): ?>
-            <div class="tab-pane <?php echo $is_first_pane ? 'active' : ''; ?>" id="tab-<?php echo $key; ?>">
-              <div class="menu-grid">
-                <?php foreach ($cat['items'] as $item): ?>
-                  <div class="menu-item">
-                    <div class="menu-item-header">
-                      <span class="item-name"><?php echo htmlspecialchars($item['name']); ?></span>
-                      <span class="badge-veg"><?php echo htmlspecialchars($item['tag']); ?></span>
-                    </div>
-                    <p class="item-desc"><?php echo htmlspecialchars($item['desc']); ?></p>
-                  </div>
-                <?php endforeach; ?>
-              </div>
-            </div>
-          <?php $is_first_pane = false; endforeach; ?>
-        </div>
-
-        <div class="menu-footer-cta">
-          <span>Need a customized catering menu for 200 to 5,000 guests?</span>
-          <a href="https://wa.me/<?php echo WHATSAPP_NUMBER; ?>?text=Hi%20Ambika%20Catering,%20please%20send%20me%20your%20full%20Catering%20Menu%20PDF" target="_blank" class="btn btn-whatsapp-sm">
-            <i class="fa-brands fa-whatsapp"></i> Get Full Menu PDF on WhatsApp
-          </a>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -383,12 +416,7 @@ while (count($row2_images) < 10) {
           </div>
           <div class="insta-details">
             <h3><?php echo INSTAGRAM_HANDLE; ?></h3>
-            <p><?php echo SITE_NAME; ?> • Event Planner & Caterers</p>
-            <div class="insta-stats">
-              <span><strong>500+</strong> Posts</span>
-              <span><strong>15.2K</strong> Followers</span>
-              <span><strong>100%</strong> Happy Clients</span>
-            </div>
+            <p>Ambika Decoretors • Event Planner & Caterers</p>
           </div>
         </div>
         <a href="<?php echo INSTAGRAM_URL; ?>" target="_blank" rel="noopener" class="btn btn-insta glow-effect">
@@ -405,7 +433,7 @@ while (count($row2_images) < 10) {
         <div class="inquiry-grid">
           <div class="inquiry-info">
             <span class="section-subtitle"><i class="fa-solid fa-calendar-check icon-gold"></i> Fast Date Booking</span>
-            <h2>Plan Your Event With <span class="text-gradient">Ambika Decoration</span></h2>
+            <h2>Plan Your Event With <span class="text-gradient">Ambika Decoretors</span></h2>
             <p>Select your event details below to calculate a quick instant estimate and send your inquiry directly to our team via WhatsApp or Phone Call.</p>
             
             <div class="direct-contact-pills">
@@ -449,6 +477,16 @@ while (count($row2_images) < 10) {
                 <select id="whatsapp-recipient" required>
                   <option value="<?php echo WHATSAPP_NUMBER_1; ?>" selected>+91 75670 49869 (Primary Line)</option>
                   <option value="<?php echo WHATSAPP_NUMBER_2; ?>">+91 99248 37197 (Secondary Line)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="venue-select">Select Preferred Venue</label>
+                <select id="venue-select" required>
+                  <option value="Pooja Farm" selected>Pooja Farm</option>
+                  <option value="Malhar Exotica & Resort">Malhar Exotica & Resort</option>
+                  <option value="Mangalyam Party Plot">Mangalyam Party Plot</option>
+                  <option value="Decor & Catering Only (Other Location)">Decor & Catering Only (Other Location)</option>
                 </select>
               </div>
 
@@ -505,9 +543,9 @@ while (count($row2_images) < 10) {
   <footer class="footer">
     <div class="container footer-content">
       <div class="footer-brand">
-        <div class="logo-emblem"><img src="assets/Logo.png" alt="Ambika Decoration Logo"></div>
+        <div class="logo-emblem"><img src="assets/Logo.png" alt="Ambika Decoretors Logo"></div>
         <h3><?php echo strtoupper(SITE_NAME); ?></h3>
-        <p>Your premier destination for party plot venue, royal chori/mandap decoration, gourmet veg catering, and end-to-end event management.</p>
+        <p>Your premier destination for party plot venue, royal decoration, gourmet veg catering, and end-to-end event management.</p>
       </div>
 
       <div class="footer-links">
@@ -548,7 +586,7 @@ while (count($row2_images) < 10) {
           <a href="<?php echo INSTAGRAM_URL_1; ?>" target="_blank" rel="noopener" class="footer-grid-card insta-card">
             <i class="fa-brands fa-instagram icon-insta"></i>
             <div>
-              <small>Instagram 1</small>
+              <small>Business Instagram</small>
               <strong><?php echo INSTAGRAM_HANDLE_1; ?></strong>
             </div>
           </a>
@@ -556,7 +594,7 @@ while (count($row2_images) < 10) {
           <a href="<?php echo INSTAGRAM_URL_2; ?>" target="_blank" rel="noopener" class="footer-grid-card insta-card">
             <i class="fa-brands fa-instagram icon-insta"></i>
             <div>
-              <small>Instagram 2</small>
+              <small>Personal Instagram</small>
               <strong><?php echo INSTAGRAM_HANDLE_2; ?></strong>
             </div>
           </a>
@@ -566,7 +604,7 @@ while (count($row2_images) < 10) {
 
     <div class="footer-bottom text-center">
       <div class="container">
-        <p>&copy; <?php echo date('Y'); ?> Ambika Decoration. All rights reserved to Ambika Decoration - Dahegam.</p>
+        <p>&copy; <?php echo date('Y'); ?> Ambika Decoretors. All rights reserved to Ambika Decoretors - Dahegam.</p>
       </div>
     </div>
   </footer>
@@ -598,30 +636,6 @@ while (count($row2_images) < 10) {
     <a href="tel:<?php echo BUSINESS_PHONE_2_RAW; ?>" class="float-btn float-phone float-phone-alt" title="Call Line 2 (+91 99248 37197)">
       <i class="fa-solid fa-phone"></i>
       <span class="float-tooltip">Call +91 99248 37197</span>
-    </a>
-  </div>
-
-  <!-- Mobile Bottom Action Navigation Bar -->
-  <div class="mobile-bottom-bar">
-    <a href="tel:<?php echo BUSINESS_PHONE_1_RAW; ?>" class="mobile-bar-item">
-      <i class="fa-solid fa-phone"></i>
-      <span>Call 1</span>
-    </a>
-    <a href="tel:<?php echo BUSINESS_PHONE_2_RAW; ?>" class="mobile-bar-item">
-      <i class="fa-solid fa-phone"></i>
-      <span>Call 2</span>
-    </a>
-    <a href="https://wa.me/<?php echo WHATSAPP_NUMBER_1; ?>?text=Hi%20Ambika%20Decoration!" target="_blank" class="mobile-bar-item highlight-wa">
-      <i class="fa-brands fa-whatsapp"></i>
-      <span>WhatsApp 1</span>
-    </a>
-    <a href="https://wa.me/<?php echo WHATSAPP_NUMBER_2; ?>?text=Hi%20Ambika%20Decoration!" target="_blank" class="mobile-bar-item highlight-wa">
-      <i class="fa-brands fa-whatsapp"></i>
-      <span>WhatsApp 2</span>
-    </a>
-    <a href="#inquiry-section" class="mobile-bar-item">
-      <i class="fa-solid fa-calendar-check"></i>
-      <span>Inquire</span>
     </a>
   </div>
 

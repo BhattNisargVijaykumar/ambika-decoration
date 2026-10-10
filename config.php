@@ -1,11 +1,11 @@
 <?php
 /**
- * Ambika Decoration & Party Plot - Core Configuration
+ * Ambika Decoretors & Party Plot - Core Configuration
  */
 
 // Business Core Details
-define('SITE_NAME', 'Ambika Decoration & Party Plot');
-define('SITE_TAGLINE', 'Royal Event Decorators & Open Lawn Venue');
+define('SITE_NAME', 'Ambika Decoretors');
+define('SITE_TAGLINE', 'Royal Event Decorators For Different Occasion(s)');
 // Primary Contact Line 1
 define('BUSINESS_PHONE_1', '+91 75670 49869');
 define('BUSINESS_PHONE_1_RAW', '+917567049869');
@@ -21,11 +21,11 @@ define('BUSINESS_PHONE', BUSINESS_PHONE_1);
 define('BUSINESS_PHONE_RAW', BUSINESS_PHONE_1_RAW);
 define('WHATSAPP_NUMBER', WHATSAPP_NUMBER_1);
 
-define('INSTAGRAM_HANDLE_1', '@ambika_decoration');
-define('INSTAGRAM_URL_1', 'https://instagram.com');
+define('INSTAGRAM_HANDLE_1', '@ambika_decoretors121');
+define('INSTAGRAM_URL_1', 'https://www.instagram.com/ambika_decoretors121/');
 
-define('INSTAGRAM_HANDLE_2', '@pooja_farm_ambika');
-define('INSTAGRAM_URL_2', 'https://instagram.com');
+define('INSTAGRAM_HANDLE_2', '@parth_joshi_97');
+define('INSTAGRAM_URL_2', 'https://www.instagram.com/parth_joshi_97/');
 
 define('INSTAGRAM_HANDLE', INSTAGRAM_HANDLE_1);
 define('INSTAGRAM_URL', INSTAGRAM_URL_1);
@@ -34,8 +34,8 @@ define('OFFICE_HOURS', '10:00 AM – 10:00 PM (Open All 7 Days)');
 
 // Dynamic Metrics
 $metrics = [
-    ['number' => 500, 'label' => 'Grand Weddings Managed'],
-    ['number' => 2500, 'label' => 'Guest Capacity Lawn'],
+    ['number' => 500, 'label' => 'Grand Events Managed'],
+    ['number' => 4500, 'label' => 'Guest Capacity Lawn'],
     ['number' => 10, 'label' => 'Years of Decor Excellence']
 ];
 
