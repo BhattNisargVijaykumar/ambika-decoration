@@ -2,18 +2,11 @@
   "version": 2,
   "cleanUrls": true,
   "trailingSlash": false,
-  "functions": {
-    "api/**/*.php": {
-      "runtime": "now-php@1.0.0"
-    },
-    "admin/**/*.php": {
-      "runtime": "now-php@1.0.0"
-    },
-    "*.php": {
-      "runtime": "now-php@1.0.0"
-    }
-  },
   "rewrites": [
+    {
+      "source": "/",
+      "destination": "/index.html"
+    },
     {
       "source": "/admin",
       "destination": "/admin/index.php"
