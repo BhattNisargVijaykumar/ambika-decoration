@@ -615,14 +615,6 @@ while (count($row2_images) < 10) {
       <button class="lightbox-close" id="lightbox-close">&times;</button>
       <img src="" alt="" id="lightbox-img">
       <div class="lightbox-caption" id="lightbox-caption"></div>
-      <div class="lightbox-action">
-        <a href="https://wa.me/<?php echo WHATSAPP_NUMBER_1; ?>?text=Hi%20Ambika%20Decoration,%20I%20am%20interested%20in%20this%20exact%20decoration%20design!" target="_blank" class="btn btn-whatsapp-sm">
-          <i class="fa-brands fa-whatsapp"></i> WhatsApp Line 1
-        </a>
-        <a href="https://wa.me/<?php echo WHATSAPP_NUMBER_2; ?>?text=Hi%20Ambika%20Decoration,%20I%20am%20interested%20in%20this%20exact%20decoration%20design!" target="_blank" class="btn btn-whatsapp-sm">
-          <i class="fa-brands fa-whatsapp"></i> WhatsApp Line 2
-        </a>
-      </div>
     </div>
   </div>
 
