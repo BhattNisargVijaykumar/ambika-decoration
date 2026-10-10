@@ -2,22 +2,36 @@
   "version": 2,
   "cleanUrls": true,
   "trailingSlash": false,
-  "rewrites": [
+  "builds": [
     {
-      "source": "/",
-      "destination": "/index.html"
+      "src": "admin/**/*.php",
+      "use": "vercel-php"
     },
     {
-      "source": "/admin",
-      "destination": "/admin/index.php"
+      "src": "api/**/*.php",
+      "use": "vercel-php"
     },
     {
-      "source": "/admin/",
-      "destination": "/admin/index.php"
+      "src": "*.php",
+      "use": "vercel-php"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/admin/?$",
+      "dest": "/admin/index.php"
     },
     {
-      "source": "/admin/:path*",
-      "destination": "/admin/:path*"
+      "src": "/admin/(.*)",
+      "dest": "/admin/$1"
+    },
+    {
+      "src": "/gallery",
+      "dest": "/gallery.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
     }
   ]
 }

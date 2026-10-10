@@ -332,7 +332,7 @@ while (count($row2_images) < 10) {
       </div>
       
       <div class="text-center margin-top-lg">
-        <a href="gallery.php" class="btn btn-gold glow-effect" style="font-size: 1.05rem; padding: 14px 32px;">
+        <a href="gallery.html" class="btn btn-gold glow-effect" style="font-size: 1.05rem; padding: 14px 32px;">
           <i class="fa-solid fa-folder-open"></i> Open Full Work Catalog & Gallery
         </a>
       </div>
