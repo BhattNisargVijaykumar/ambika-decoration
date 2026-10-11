@@ -20,69 +20,27 @@ function scanMediaDir($dirPath, $relPrefix, $extensions) {
     return $files;
 }
 
-$catalog_photos = scanMediaDir(__DIR__ . '/assets/images/catalog', 'assets/images/catalog', ['jpg', 'jpeg', 'png', 'webp']);
+// Only load images from row1 and row2 (no catalog, no root)
 $row1_photos = scanMediaDir(__DIR__ . '/assets/images/row1', 'assets/images/row1', ['jpg', 'jpeg', 'png', 'webp']);
 $row2_photos = scanMediaDir(__DIR__ . '/assets/images/row2', 'assets/images/row2', ['jpg', 'jpeg', 'png', 'webp']);
-$root_photos = scanMediaDir(__DIR__ . '/assets/images', 'assets/images', ['jpg', 'jpeg', 'png', 'webp']);
 
-// Combine all photos
-$photo_files = array_merge($catalog_photos, $row1_photos, $row2_photos, $root_photos);
+// Merge row1 + row2 only
+$photo_files = array_merge($row1_photos, $row2_photos);
 
-// Scan assets/videos folder
+// Scan assets/videos folder for real video files only (no static fallback)
 $video_files_scanned = scanMediaDir(__DIR__ . '/assets/videos', 'assets/videos', ['mp4', 'webm', 'mov', 'm4v']);
 
-// Sample showcase videos fallback if folder has no videos yet
 $video_files = [];
 foreach ($video_files_scanned as $v) {
     $video_files[] = [
         'title' => ucwords(str_replace(['_', '-'], ' ', $v['name'])),
-        'src' => $v['src'],
-        'poster' => 'assets/images/mandap_entrance_gate.jpg',
-        'desc' => 'Live Event Video Footage'
+        'src'   => $v['src'],
+        'desc'  => 'Ambika Decoretors - Live Event Video'
     ];
 }
-
-if (empty($video_files)) {
-    $video_files = [
-        [
-            'title' => 'Grand Mandap & Entrance Lightings Reel',
-            'poster' => 'assets/images/mandap_entrance_gate.jpg',
-            'src' => 'assets/images/mandap_entrance_gate.jpg',
-            'desc' => 'Royal fairy light tunnel and grand entrance gate lighting walk-through.'
-        ],
-        [
-            'title' => 'Spacious Party Plot & Night Ambiance',
-            'poster' => 'assets/images/party_plot_lawn.jpg',
-            'src' => 'assets/images/party_plot_lawn.jpg',
-            'desc' => 'Overhead chandelier glow and lawn seating layout view.'
-        ],
-        [
-            'title' => 'Royal Sangeet Stage & Floral Setup',
-            'poster' => 'assets/images/sangeet_stage_decor.jpg',
-            'src' => 'assets/images/sangeet_stage_decor.jpg',
-            'desc' => 'Gold filigree backdrop stage decoration and spotlight effects.'
-        ],
-        [
-            'title' => 'Traditional Chori Mandap Setup',
-            'poster' => 'assets/images/wedding_chori_mandap.jpg',
-            'src' => 'assets/images/wedding_chori_mandap.jpg',
-            'desc' => 'Authentic sacred Chori Mandap with fresh flower garlands.'
-        ],
-        [
-            'title' => 'Gourmet Veg Catering & Live Counter Setup',
-            'poster' => 'assets/images/catering_buffet.jpg',
-            'src' => 'assets/images/catering_buffet.jpg',
-            'desc' => 'Live food counters, thali service, and dessert presentations.'
-        ],
-        [
-            'title' => 'Gujarati Sweets & Dessert Fountain Showcase',
-            'poster' => 'assets/images/catering_sweets.jpg',
-            'src' => 'assets/images/catering_sweets.jpg',
-            'desc' => 'Jalebi Rabdi live station and Royal Basundi display.'
-        ]
-    ];
-}
+// No static fallback - JS will show empty state if no videos found
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -408,12 +366,46 @@ if (empty($video_files)) {
     </div>
   </footer>
 
-  <!-- Lightbox Modal -->
+  <!-- Image Lightbox Modal -->
   <div class="lightbox-modal" id="lightbox-modal">
     <div class="lightbox-content">
       <button class="lightbox-close" id="lightbox-close">&times;</button>
       <img src="" alt="" id="lightbox-img">
       <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
+  </div>
+
+  <!-- Video Player Modal -->
+  <div id="video-modal" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.97); align-items:center; justify-content:center; flex-direction:column;">
+    <!-- Close -->
+    <button onclick="closeVideoModal()" style="position:absolute; top:18px; right:24px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15); color:#fff; font-size:1.6rem; cursor:pointer; z-index:10000; line-height:1; width:42px; height:42px; border-radius:50%; display:flex; align-items:center; justify-content:center;">&times;</button>
+
+    <!-- Counter badge -->
+    <div id="video-modal-counter" style="position:absolute; top:22px; left:24px; color:var(--gold-light); font-size:0.82rem; font-weight:600; background:rgba(0,0,0,0.5); padding:4px 12px; border-radius:20px; border:1px solid var(--border-gold);"></div>
+
+    <div style="width:100%; max-width:1100px; padding:0 16px; position:relative; display:flex; align-items:center; gap:12px;">
+
+      <!-- Prev Button -->
+      <button onclick="navigateVideo(-1)" id="btn-prev-video" style="flex-shrink:0; width:48px; height:48px; border-radius:50%; background:rgba(212,175,55,0.15); border:1.5px solid var(--border-gold); color:var(--gold-primary); font-size:1.3rem; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.2s;" onmouseover="this.style.background='rgba(212,175,55,0.35)'" onmouseout="this.style.background='rgba(212,175,55,0.15)'">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+
+      <div style="flex:1;">
+        <div id="video-modal-title" style="color:var(--gold-primary); font-family:'Cinzel',serif; font-size:1rem; font-weight:700; margin-bottom:10px; text-align:center; letter-spacing:1px;"></div>
+        <video id="video-modal-player"
+          controls
+          autoplay
+          playsinline
+          style="width:100%; max-height:78vh; border-radius:14px; border:1.5px solid var(--border-gold); background:#000; display:block; box-shadow:0 0 60px rgba(212,175,55,0.25);">
+          Your browser does not support the video tag.
+        </video>
+        <div id="video-modal-desc" style="color:var(--gold-light); font-size:0.85rem; text-align:center; margin-top:10px;"></div>
+      </div>
+
+      <!-- Next Button -->
+      <button onclick="navigateVideo(1)" id="btn-next-video" style="flex-shrink:0; width:48px; height:48px; border-radius:50%; background:rgba(212,175,55,0.15); border:1.5px solid var(--border-gold); color:var(--gold-primary); font-size:1.3rem; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.2s;" onmouseover="this.style.background='rgba(212,175,55,0.35)'" onmouseout="this.style.background='rgba(212,175,55,0.15)'">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
     </div>
   </div>
 
@@ -487,28 +479,121 @@ if (empty($video_files)) {
       const grid = document.getElementById('videos-grid');
       grid.innerHTML = '';
 
-      allVideos.forEach((v) => {
+      if (!allVideos || allVideos.length === 0) {
+        grid.innerHTML = `
+          <div style="grid-column:1/-1; text-align:center; padding:60px 20px; color:var(--gold-light);">
+            <i class="fa-solid fa-video-slash" style="font-size:3rem; color:var(--gold-primary); margin-bottom:18px; display:block;"></i>
+            <div style="font-size:1.2rem; font-weight:700; color:#fff; margin-bottom:8px;">No Videos Yet</div>
+            <div style="font-size:0.9rem;">Add video files to <code style="color:var(--gold-primary);">assets/videos/</code> folder to display them here.</div>
+          </div>
+        `;
+        return;
+      }
+
+      allVideos.forEach((v, idx) => {
         const card = document.createElement('div');
         card.className = 'gallery-media-card glass-card';
-        card.onclick = () => {
-          if (v.src && (v.src.endsWith('.mp4') || v.src.endsWith('.webm'))) {
-            window.open(v.src, '_blank');
-          } else {
-            alert('Video Showcase: ' + v.title + '\n' + v.desc);
-          }
-        };
+        card.style.cursor = 'pointer';
+        card.onclick = () => openVideoModal(v, idx);
 
+        // Use a canvas thumbnail showing the real first frame of the video
+        const thumbId = 'vthumb-' + idx;
         card.innerHTML = `
-          <img src="${v.poster}" alt="${v.title}" loading="lazy">
-          <div class="video-play-badge"><i class="fa-solid fa-play"></i></div>
-          <div class="gallery-card-overlay" style="opacity: 1; background: linear-gradient(0deg, rgba(9,12,18,0.95) 0%, rgba(9,12,18,0.4) 100%);">
+          <div style="width:100%; position:relative; background:#0b0e14; overflow:hidden;">
+            <canvas id="${thumbId}" style="width:100%; display:block; aspect-ratio:16/9; object-fit:cover;"></canvas>
+            <div class="video-play-badge"><i class="fa-solid fa-play"></i></div>
+          </div>
+          <div class="gallery-card-overlay" style="opacity:1; background:linear-gradient(0deg,rgba(9,12,18,0.92) 0%,rgba(9,12,18,0.1) 100%);">
             <div class="gallery-card-title"><i class="fa-solid fa-video icon-gold"></i> ${v.title}</div>
-            <div class="gallery-card-sub">${v.desc}</div>
+            <div class="gallery-card-sub"><i class="fa-solid fa-circle-play" style="margin-right:4px;"></i>Tap to play</div>
           </div>
         `;
         grid.appendChild(card);
+
+        // Capture first frame of video into canvas as thumbnail
+        const tmpVideo = document.createElement('video');
+        tmpVideo.src = v.src;
+        tmpVideo.muted = true;
+        tmpVideo.playsInline = true;
+        tmpVideo.preload = 'metadata';
+        tmpVideo.crossOrigin = 'anonymous';
+        tmpVideo.addEventListener('loadeddata', function() {
+          tmpVideo.currentTime = 0.5;
+        });
+        tmpVideo.addEventListener('seeked', function() {
+          const canvas = document.getElementById(thumbId);
+          if (canvas) {
+            canvas.width  = tmpVideo.videoWidth  || 640;
+            canvas.height = tmpVideo.videoHeight || 360;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(tmpVideo, 0, 0, canvas.width, canvas.height);
+          }
+          tmpVideo.src = '';
+        });
+        tmpVideo.load();
       });
     }
+
+    let currentVideoIndex = 0;
+
+    function openVideoModal(v, index) {
+      currentVideoIndex = (index !== undefined) ? index : allVideos.findIndex(x => x.src === v.src);
+      const modal   = document.getElementById('video-modal');
+      const player  = document.getElementById('video-modal-player');
+      const title   = document.getElementById('video-modal-title');
+      const desc    = document.getElementById('video-modal-desc');
+      const counter = document.getElementById('video-modal-counter');
+
+      // Stop previous, reset fully before loading new
+      player.pause();
+      player.removeAttribute('src');
+      player.load();
+
+      player.src = v.src;
+      player.currentTime = 0;
+      title.textContent   = v.title;
+      desc.textContent    = v.desc;
+      counter.textContent = (currentVideoIndex + 1) + ' / ' + allVideos.length;
+
+      // Show/hide prev-next based on position
+      document.getElementById('btn-prev-video').style.opacity = currentVideoIndex === 0 ? '0.3' : '1';
+      document.getElementById('btn-next-video').style.opacity = currentVideoIndex === allVideos.length - 1 ? '0.3' : '1';
+
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+      player.load();
+      player.play().catch(() => {});
+    }
+
+    function navigateVideo(dir) {
+      const newIndex = currentVideoIndex + dir;
+      if (newIndex < 0 || newIndex >= allVideos.length) return;
+      openVideoModal(allVideos[newIndex], newIndex);
+    }
+
+    function closeVideoModal() {
+      const modal  = document.getElementById('video-modal');
+      const player = document.getElementById('video-modal-player');
+      player.pause();
+      player.removeAttribute('src');
+      player.load();
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+
+    // Close video modal on backdrop click
+    document.getElementById('video-modal').addEventListener('click', function(e) {
+      if (e.target === this) closeVideoModal();
+    });
+
+    // Keyboard: Escape = close, Left/Right = prev/next
+    document.addEventListener('keydown', function(e) {
+      const modal = document.getElementById('video-modal');
+      if (modal.style.display === 'none') return;
+      if (e.key === 'Escape')      closeVideoModal();
+      if (e.key === 'ArrowRight')  navigateVideo(1);
+      if (e.key === 'ArrowLeft')   navigateVideo(-1);
+    });
 
     function initLightbox() {
       const modal = document.getElementById('lightbox-modal');
