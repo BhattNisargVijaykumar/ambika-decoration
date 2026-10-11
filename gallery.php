@@ -46,8 +46,31 @@ foreach ($video_files_scanned as $v) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Complete Work Catalog & Gallery | <?php echo SITE_NAME; ?></title>
-  <meta name="description" content="Explore complete photos and videos catalog of Ambika Decoretors & Party Plot - Mandap setup, stage decor, illuminations & gourmet catering.">
+  <title>Gallery & Videos | Ambika Decoretors Dahegam | Wedding & Event Decoration Catalog</title>
+  <meta name="description" content="Explore full photo & video catalog of Ambika Decoretors & Party Plot in Dahegam. Wedding mandap, stage decoration, party plot, lawn celebrations near Malhar Exotica.">
+  <meta name="keywords" content="Ambika Decoretors gallery, Ambika decoration photos, wedding decoration videos Dahegam, event videos Dahegam, party plot photos Dahegam, Mandap decoration gallery, Malhar Exotica wedding decoration, royal celebration gallery, Dahegam decorators catalog">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://ambikadecoration.in/gallery.php">
+
+  <!-- Geo Targeting -->
+  <meta name="geo.region" content="IN-GJ">
+  <meta name="geo.placename" content="Dahegam, Gujarat, India">
+  <meta name="geo.position" content="23.1657;72.8243">
+  <meta name="ICBM" content="23.1657, 72.8243">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ambikadecoration.in/gallery.php">
+  <meta property="og:title" content="Gallery & Videos | Ambika Decoretors Dahegam">
+  <meta property="og:description" content="Browse our wedding decor, grand stage setups, party plot celebrations and event videos in Dahegam.">
+  <meta property="og:image" content="https://ambikadecoration.in/assets/Logo.png">
+  <meta property="og:site_name" content="Ambika Decoretors">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Gallery & Videos | Ambika Decoretors Dahegam">
+  <meta name="twitter:description" content="Browse wedding decor, stage setups and event videos in Dahegam.">
+  <meta name="twitter:image" content="https://ambikadecoration.in/assets/Logo.png">
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">

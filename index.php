@@ -58,24 +58,108 @@ while (count($row2_images) < 10) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><?php echo SITE_NAME; ?> | Luxury Wedding Decor, Party Plot & Catering</title>
-  <meta name="description" content="Premier Party Plot venue, traditional Chori & Mandap decoration, and royal pure-veg catering services for weddings, receptions, and grand events.">
-  
+
+  <!-- ===== PRIMARY SEO ===== -->
+  <title>Ambika Decoretors Dahegam | Wedding Decoration, Event Planner & Party Plot Near Malhar Exotica</title>
+  <meta name="description" content="Ambika Decoretors & Party Plot in Dahegam — Best wedding decoration, Chori Mandap setup, royal stage decor, event management, pure-veg catering & lawn venue. Serving Dahegam, Dehgam, Malhar Exotica area. Book now!">
+  <meta name="keywords" content="Ambika Decoretors, Ambika Decoration, Ambica Decoration, Ambika Decorators Dahegam, decoration Dahegam, decoration Dehgam, event planner Dahegam, event management Dahegam, wedding decoration Dahegam, wedding planner Dahegam, marriage decoration Dahegam, reception decoration Dahegam, party plot Dahegam, lawn Dahegam, garden venue Dahegam, farm Dahegam, pooja farm Dahegam, Malhar Exotica, Malhar resort decoration, royal decoration, grand celebration, Chori Mandap, Mandap decoration, stage decor, royal event, pure veg catering, catering Dahegam, event venue Gujarat, party plot Gujarat, wedding venue near Malhar, decoration near Malhar Exotica, Ambika party plot, Ambika lawn, Ambika farm">
+  <meta name="author" content="Ambika Decoretors, Dahegam">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://ambikadecoration.in/">
+
+  <!-- ===== GEO TARGETING ===== -->
+  <meta name="geo.region" content="IN-GJ">
+  <meta name="geo.placename" content="Dahegam, Gujarat, India">
+  <meta name="geo.position" content="23.1657;72.8243">
+  <meta name="ICBM" content="23.1657, 72.8243">
+
+  <!-- ===== OPEN GRAPH (Facebook / WhatsApp Preview) ===== -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ambikadecoration.in/">
+  <meta property="og:title" content="Ambika Decoretors Dahegam | Wedding Decoration & Event Planner">
+  <meta property="og:description" content="Best wedding decoration, Chori Mandap, royal stage decor, event management & pure-veg catering in Dahegam. Party plot & lawn venue near Malhar Exotica.">
+  <meta property="og:image" content="https://ambikadecoration.in/assets/Logo.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Ambika Decoretors">
+  <meta property="og:locale" content="en_IN">
+
+  <!-- ===== TWITTER CARD ===== -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ambika Decoretors Dahegam | Wedding Decoration & Event Planner">
+  <meta name="twitter:description" content="Best wedding decoration, Chori Mandap, royal stage decor & event management in Dahegam near Malhar Exotica.">
+  <meta name="twitter:image" content="https://ambikadecoration.in/assets/Logo.png">
+
+  <!-- ===== JSON-LD STRUCTURED DATA ===== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Ambika Decoretors & Party Plot",
+    "alternateName": ["Ambika Decoration", "Ambica Decoration", "Ambika Decorators Dahegam"],
+    "url": "https://ambikadecoration.in/",
+    "logo": "https://ambikadecoration.in/assets/Logo.png",
+    "image": "https://ambikadecoration.in/assets/Logo.png",
+    "description": "Premier wedding decoration, Chori Mandap setup, royal stage decor, event management, party plot lawn venue and pure-veg catering services in Dahegam, Gujarat.",
+    "telephone": "+91-9876543210",
+    "priceRange": "₹₹",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Near Malhar Exotica, Dahegam",
+      "addressLocality": "Dahegam",
+      "addressRegion": "Gujarat",
+      "postalCode": "382305",
+      "addressCountry": "IN"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 23.1657,
+      "longitude": 72.8243
+    },
+    "openingHours": "Mo-Su 09:00-21:00",
+    "sameAs": [
+      "https://github.com/BhattNisargVijaykumar/ambika-decoration"
+    ],
+    "serviceArea": {
+      "@type": "GeoCircle",
+      "geoMidpoint": {
+        "@type": "GeoCoordinates",
+        "latitude": 23.1657,
+        "longitude": 72.8243
+      },
+      "geoRadius": "50000"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Event & Decoration Services",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Wedding Decoration & Mandap Setup" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Reception Stage Decor" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Party Plot & Lawn Venue" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Pure Veg Catering & Live Counters" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Sangeet & Pooja Decoration" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Grand Royal Event Management" } }
+      ]
+    }
+  }
+  </script>
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
+
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
+
   <!-- Favicon & Tab Icon -->
   <link rel="icon" type="image/png" href="assets/Logo.png">
   <link rel="apple-touch-icon" href="assets/Logo.png">
-  
+
   <!-- Custom Master Styles -->
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
   <!-- Royal Preloader Screen (3s Character Reveal & 0-100% Counter) -->
